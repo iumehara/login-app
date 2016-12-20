@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("users")
 public class UsersController {
+    private UserRepo repo;
+
+    UsersController(UserRepo repo) {
+        this.repo = repo;
+    }
 
     @GetMapping("{username}")
     public User show(@PathVariable String username) {
-        return new User("adam", "secret");
+        return repo.findByUsername(username);
     }
 }

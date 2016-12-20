@@ -9,12 +9,12 @@ public class User {
         this.password = password;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public String getUsername() {
         return username;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public String getPassword() {
         return password;
     }

@@ -5,6 +5,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -12,8 +14,12 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 public class UsersControllerTest {
     @Test
     public void test_show_returnsUser() throws Exception {
-        UsersController controller = new UsersController();
+        UserRepo mockRepo = mock(UserRepo.class);
+        UsersController controller = new UsersController(mockRepo);
         MockMvc mockController = standaloneSetup(controller).build();
+
+        when(mockRepo.findByUsername("adam"))
+                .thenReturn(new User("adam", "secret"));
 
         mockController.perform(MockMvcRequestBuilders.get("/users/adam"))
                 .andExpect(status().isOk())
