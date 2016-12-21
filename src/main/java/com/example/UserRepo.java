@@ -1,9 +1,16 @@
 package com.example;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 class UserRepo {
-    UserRepo() {}
+    private UserDataMapper dataMapper;
+
+    UserRepo(UserDataMapper dataMapper) {
+        this.dataMapper = dataMapper;
+    }
 
     User findByUsername(String username) {
-        return new User("adam", "secret");
+        return dataMapper.findByUsername(username);
     }
 }
