@@ -1,10 +1,17 @@
 package com.example;
 
 public class User {
+    private int id;
     private String username;
 
-    User(String username) {
+    User(int id, String username) {
+        this.id = id;
         this.username = username;
+    }
+
+    @SuppressWarnings({"unused", "WeakerAccess"})
+    public int getId() {
+        return id;
     }
 
     @SuppressWarnings({"unused", "WeakerAccess"})
@@ -12,6 +19,7 @@ public class User {
         return username;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -19,18 +27,22 @@ public class User {
 
         User user = (User) o;
 
+        if (id != user.id) return false;
         return username != null ? username.equals(user.username) : user.username == null;
     }
 
     @Override
     public int hashCode() {
-        return username != null ? username.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 '}';
     }
 }

@@ -32,7 +32,7 @@ public class LoginControllerTest {
         when(repo.getUserSession("adam", "secreta"))
                 .thenReturn(Optional.of(new UserSession(
                         "XXXFAKETOKENXXX",
-                        new User("adam")
+                        new User(1, "adam")
                 )));
 
         mockController.perform(post("/login")
@@ -41,6 +41,7 @@ public class LoginControllerTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token", equalTo("XXXFAKETOKENXXX")))
+                .andExpect(jsonPath("$.id", equalTo(1)))
                 .andExpect(jsonPath("$.username", equalTo("adam")));
     }
 }

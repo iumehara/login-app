@@ -21,10 +21,11 @@ public class UsersControllerTest {
         MockMvc mockController = standaloneSetup(controller).build();
 
         when(mockRepo.findByUsername("adam"))
-                .thenReturn(Optional.of(new User("adam")));
+                .thenReturn(Optional.of(new User(1, "adam")));
 
         mockController.perform(get("/users/adam"))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", equalTo(1)))
                 .andExpect(jsonPath("$.username", equalTo("adam")));
     }
 }

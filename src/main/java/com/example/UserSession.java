@@ -2,16 +2,23 @@ package com.example;
 
 public class UserSession {
     private String token;
+    private int id;
     private String username;
 
     UserSession(String token, User user) {
         this.token = token;
+        this.id = user.getId();
         this.username = user.getUsername();
     }
 
     @SuppressWarnings({"unused", "WeakerAccess"})
     public String getToken() {
         return token;
+    }
+
+    @SuppressWarnings({"unused", "WeakerAccess"})
+    public int getId() {
+        return id;
     }
 
     @SuppressWarnings("unused")
@@ -27,6 +34,7 @@ public class UserSession {
 
         UserSession that = (UserSession) o;
 
+        if (id != that.id) return false;
         if (token != null ? !token.equals(that.token) : that.token != null) return false;
         return username != null ? username.equals(that.username) : that.username == null;
     }
@@ -34,6 +42,7 @@ public class UserSession {
     @Override
     public int hashCode() {
         int result = token != null ? token.hashCode() : 0;
+        result = 31 * result + id;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         return result;
     }
@@ -42,6 +51,7 @@ public class UserSession {
     public String toString() {
         return "UserSession{" +
                 "token='" + token + '\'' +
+                ", id=" + id +
                 ", username='" + username + '\'' +
                 '}';
     }

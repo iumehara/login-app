@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
@@ -50,6 +51,7 @@ public class JdbcUserDataMapperTest {
         User user = maybeUser.get();
 
         assertThat(user.getUsername(), is("adam"));
+        assertNotNull(user.getId());
     }
 
     @Test
@@ -72,6 +74,7 @@ public class JdbcUserDataMapperTest {
         User user = maybeUser.get();
 
         assertThat(user.getUsername(), is("adam"));
+        assertNotNull(user.getId());
     }
 
     @Test

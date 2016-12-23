@@ -21,6 +21,7 @@ public class JdbcUserDataMapper implements UserDataMapper {
             User user = jdbcTemplate.queryForObject(
                     queryString,
                     (rs, i) -> new User(
+                            rs.getInt("id"),
                             rs.getString("name")
                     ),
                     username
@@ -42,6 +43,7 @@ public class JdbcUserDataMapper implements UserDataMapper {
             User user = jdbcTemplate.queryForObject(
                     queryString,
                     (rs, i) -> new User(
+                            rs.getInt("id"),
                             rs.getString("name")
                     ),
                     username,
