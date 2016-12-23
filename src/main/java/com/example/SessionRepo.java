@@ -3,9 +3,11 @@ package com.example;
 import java.util.Optional;
 
 class SessionRepo {
-    Optional<String> create(User user) {
+    Optional<Session> create(User user) {
         String usernameString = user.getUsername();
 
-        return Optional.of("XXXSECRET_TOKEN" + usernameString + "XXX");
+        String token = "XXXSECRET_TOKEN" + usernameString + "XXX";
+
+        return Optional.of(new Session(token, user));
     }
 }

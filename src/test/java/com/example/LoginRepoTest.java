@@ -27,11 +27,12 @@ public class LoginRepoTest {
 
     @Test
     public void test_getUserSession_returnsUserSessionOnSuccess() throws Exception {
+        User user = new User(1, "adam");
         when(userRepo.validate(any(LoginCredentials.class)))
-                .thenReturn(Optional.of(new User(1, "adam")));
+                .thenReturn(Optional.of(user));
 
         when(sessionRepo.create(any(User.class)))
-                .thenReturn(Optional.of("token"));
+                .thenReturn(Optional.of(new Session("token", user)));
 
         Optional<Session> maybeUserSession = repo.getUserSession("adam", "secret");
 
