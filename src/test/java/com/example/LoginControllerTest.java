@@ -30,7 +30,7 @@ public class LoginControllerTest {
     @Test
     public void test_create_returnsUserSessionOnSuccess() throws Exception {
         when(repo.getUserSession("adam", "secreta"))
-                .thenReturn(Optional.of(new UserSession(
+                .thenReturn(Optional.of(new Session(
                         "XXXFAKETOKENXXX",
                         new User(1, "adam")
                 )));

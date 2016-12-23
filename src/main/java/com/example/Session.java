@@ -1,11 +1,11 @@
 package com.example;
 
-public class UserSession {
+public class Session {
     private String token;
     private int id;
     private String username;
 
-    UserSession(String token, User user) {
+    Session(String token, User user) {
         this.token = token;
         this.id = user.getId();
         this.username = user.getUsername();
@@ -32,7 +32,7 @@ public class UserSession {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserSession that = (UserSession) o;
+        Session that = (Session) o;
 
         if (id != that.id) return false;
         if (token != null ? !token.equals(that.token) : that.token != null) return false;
@@ -49,7 +49,7 @@ public class UserSession {
 
     @Override
     public String toString() {
-        return "UserSession{" +
+        return "Session{" +
                 "token='" + token + '\'' +
                 ", id=" + id +
                 ", username='" + username + '\'' +

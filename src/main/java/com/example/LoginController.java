@@ -15,7 +15,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public UserSession create(@RequestBody LoginCredentials credentials) {
+    public Session create(@RequestBody LoginCredentials credentials) {
         return repo.getUserSession(credentials.getUsername(), credentials.getPassword())
                 .orElseThrow(() -> new RuntimeException("error"));
     }
