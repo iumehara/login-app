@@ -2,6 +2,8 @@ package com.example;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 class UserRepo {
     private UserDataMapper dataMapper;
@@ -10,7 +12,11 @@ class UserRepo {
         this.dataMapper = dataMapper;
     }
 
-    User findByUsername(String username) {
+    Optional<User> findByUsername(String username) {
         return dataMapper.findByUsername(username);
+    }
+
+    Optional<User> validate(LoginCredentials credentials) {
+        return dataMapper.validate(credentials);
     }
 }

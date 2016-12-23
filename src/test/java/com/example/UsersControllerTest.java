@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Optional;
+
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -19,7 +21,7 @@ public class UsersControllerTest {
         MockMvc mockController = standaloneSetup(controller).build();
 
         when(mockRepo.findByUsername("adam"))
-                .thenReturn(new User("adam", "secret"));
+                .thenReturn(Optional.of(new User("adam", "secret")));
 
         mockController.perform(MockMvcRequestBuilders.get("/users/adam"))
                 .andExpect(status().isOk())

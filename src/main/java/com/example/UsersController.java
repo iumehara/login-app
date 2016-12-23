@@ -16,6 +16,7 @@ public class UsersController {
 
     @GetMapping("{username}")
     public User show(@PathVariable String username) {
-        return repo.findByUsername(username);
+        return repo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("error"));
     }
 }

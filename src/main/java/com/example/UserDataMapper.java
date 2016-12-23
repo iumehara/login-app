@@ -1,5 +1,9 @@
 package com.example;
 
+import java.util.Optional;
+
 public interface UserDataMapper {
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
+
+    Optional<User> validate(LoginCredentials credentials);
 }
