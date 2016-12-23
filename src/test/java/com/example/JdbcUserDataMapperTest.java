@@ -1,6 +1,5 @@
 package com.example;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,12 +20,9 @@ public class JdbcUserDataMapperTest {
 
     @Before
     public void setUp() throws Exception {
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL("jdbc:mysql://localhost/login_app_test");
-        dataSource.setUser("root");
-        jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate = JdbcTestTemplate.create();
 
-        SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate)
+        SimpleJdbcInsert insert = new SimpleJdbcInsert(this.jdbcTemplate)
                 .withTableName("users")
                 .usingColumns("name", "password")
                 .usingGeneratedKeyColumns("id");
