@@ -11,7 +11,7 @@ public class UserRepoTest {
     @Test
     public void test_find_returnsUser() throws Exception {
         FakeUserDataMapper dataMapper = new FakeUserDataMapper();
-        dataMapper.findByUsername_returnValue = Optional.of(new User("adam", "secret"));
+        dataMapper.findByUsername_returnValue = Optional.of(new User("adam"));
         UserRepo repo = new UserRepo(dataMapper);
 
 
@@ -20,6 +20,5 @@ public class UserRepoTest {
 
         User user = maybeUser.get();
         assertThat(user.getUsername(), equalTo("adam"));
-        assertThat(user.getPassword(), equalTo("secret"));
     }
 }

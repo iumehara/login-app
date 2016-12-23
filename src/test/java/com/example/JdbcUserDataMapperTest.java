@@ -50,7 +50,6 @@ public class JdbcUserDataMapperTest {
         User user = maybeUser.get();
 
         assertThat(user.getUsername(), is("adam"));
-        assertThat(user.getPassword(), is("secret"));
     }
 
     @Test
@@ -73,7 +72,6 @@ public class JdbcUserDataMapperTest {
         User user = maybeUser.get();
 
         assertThat(user.getUsername(), is("adam"));
-        assertThat(user.getPassword(), is("secret"));
     }
 
     @Test
