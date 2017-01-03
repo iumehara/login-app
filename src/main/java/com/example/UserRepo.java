@@ -19,4 +19,8 @@ class UserRepo {
     Optional<User> validate(LoginCredentials credentials) {
         return dataMapper.validate(credentials);
     }
+
+    Optional<User> create(UserParams userParams) {
+        return null;
+    }
 }
