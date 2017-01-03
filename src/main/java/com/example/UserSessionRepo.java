@@ -10,9 +10,7 @@ class UserSessionRepo {
     }
 
     Optional<UserSession> create(User user) {
-        String usernameString = user.getUsername();
-
-        String token = "XXXSECRET_TOKEN" + usernameString + "XXX";
+        String token = TokenGenerator.createRandom();
 
         Optional<Session> maybeSession = sessionDataMapper.create(user.getId(), token);
 
