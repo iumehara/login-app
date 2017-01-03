@@ -21,6 +21,6 @@ class UserRepo {
     }
 
     Optional<User> create(UserParams userParams) {
-        return null;
+        return dataMapper.create(userParams);
     }
 }

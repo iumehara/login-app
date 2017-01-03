@@ -19,4 +19,12 @@ public class FakeUserDataMapper implements UserDataMapper {
         validate_param_credentials = credentials;
         return validate_returnValue;
     }
+
+    Optional<User> create_returnValue;
+    UserParams create_param_userParams;
+    @Override
+    public Optional<User> create(UserParams userParams) {
+        create_param_userParams = userParams;
+        return create_returnValue;
+    }
 }

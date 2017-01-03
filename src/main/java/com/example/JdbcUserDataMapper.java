@@ -54,4 +54,9 @@ public class JdbcUserDataMapper implements UserDataMapper {
             return Optional.empty();
         }
     }
+
+    @Override
+    public Optional<User> create(UserParams userParams) {
+        return null;
+    }
 }
