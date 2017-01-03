@@ -31,7 +31,7 @@ public class LoginControllerTest {
     public void test_create_returnsUserSessionOnSuccess() throws Exception {
         when(repo.getUserSession("adam", "secreta"))
                 .thenReturn(Optional.of(new UserSession(
-                        "XXXFAKETOKENXXX",
+                        new Session("XXXFAKETOKENXXX", 1),
                         new User(1, "adam")
                 )));
 

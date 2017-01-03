@@ -3,10 +3,10 @@ package com.example;
 import java.util.Optional;
 
 class UserSessionRepo {
-    private SessionDataMapper dataMapper;
+    private SessionDataMapper sessionDataMapper;
 
-    UserSessionRepo(SessionDataMapper dataMapper) {
-        this.dataMapper = dataMapper;
+    UserSessionRepo(SessionDataMapper sessionDataMapper) {
+        this.sessionDataMapper = sessionDataMapper;
     }
 
     Optional<UserSession> create(User user) {
@@ -14,12 +14,13 @@ class UserSessionRepo {
 
         String token = "XXXSECRET_TOKEN" + usernameString + "XXX";
 
-        Optional<Session> maybeSession = dataMapper.create(user.getId(), token);
+        Optional<Session> maybeSession = sessionDataMapper.create(user.getId(), token);
 
         if(!maybeSession.isPresent()) {
             return Optional.empty();
         }
 
-        return Optional.of(new UserSession(maybeSession.get().getToken(), user));
+        UserSession userSession = new UserSession(maybeSession.get(), user);
+        return Optional.of(userSession);
     }
 }

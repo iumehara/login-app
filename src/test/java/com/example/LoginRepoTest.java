@@ -32,7 +32,10 @@ public class LoginRepoTest {
                 .thenReturn(Optional.of(user));
 
         when(userSessionRepo.create(any(User.class)))
-                .thenReturn(Optional.of(new UserSession("token", user)));
+                .thenReturn(Optional.of(new UserSession(
+                        new Session("token", user.getId()),
+                        user
+                )));
 
         Optional<UserSession> maybeUserSession = repo.getUserSession("adam", "secret");
 
