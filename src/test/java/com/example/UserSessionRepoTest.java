@@ -9,28 +9,28 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
-public class SessionRepoTest {
-    private SessionRepo repo;
+public class UserSessionRepoTest {
+    private UserSessionRepo repo;
     private FakeSessionDataMapper dataMapper;
 
     @Before
     public void setUp() throws Exception {
         dataMapper = new FakeSessionDataMapper();
-        repo = new SessionRepo(dataMapper);
+        repo = new UserSessionRepo(dataMapper);
     }
 
     @Test
     public void create_returnsSessionOnSuccess() throws Exception {
-        dataMapper.create_returnValue = Optional.of(new Session("token", new User(1, "adam")));
+        dataMapper.create_returnValue = Optional.of(new Session("token", 1));
         User user = new User(1, "adam");
 
-        Optional<Session> maybeSession = repo.create(user);
+        Optional<UserSession> maybeSession = repo.create(user);
 
         assertThat(dataMapper.create_param_user_id, is(1));
-        Session session = maybeSession.get();
-        assertThat(session.getId(), is(1));
-        assertThat(session.getUsername(), is("adam"));
-        assertThat(session.getToken(), is("token"));
+        UserSession userSession = maybeSession.get();
+        assertThat(userSession.getId(), is(1));
+        assertThat(userSession.getUsername(), is("adam"));
+        assertThat(userSession.getToken(), is("token"));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class SessionRepoTest {
         dataMapper.create_returnValue = Optional.empty();
         User user = new User(1, "adam");
 
-        Optional<Session> maybeSession = repo.create(user);
+        Optional<UserSession> maybeSession = repo.create(user);
 
         assertThat(maybeSession.isPresent(), is(false));
     }

@@ -5,19 +5,19 @@ import java.util.Optional;
 
 class LoginRepo {
     private UserRepo userRepo;
-    private SessionRepo sessionRepo;
+    private UserSessionRepo userSessionRepo;
 
-    LoginRepo(UserRepo userRepo, SessionRepo sessionRepo) {
+    LoginRepo(UserRepo userRepo, UserSessionRepo userSessionRepo) {
         this.userRepo = userRepo;
-        this.sessionRepo = sessionRepo;
+        this.userSessionRepo = userSessionRepo;
     }
 
-    Optional<Session> getUserSession(String username, String password) {
+    Optional<UserSession> getUserSession(String username, String password) {
         Optional<User> maybeUser = userRepo.validate(new LoginCredentials(username, password));
         if(!maybeUser.isPresent()) {
             return Optional.empty();
         }
 
-        return sessionRepo.create(maybeUser.get());
+        return userSessionRepo.create(maybeUser.get());
     }
 }

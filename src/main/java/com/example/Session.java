@@ -2,28 +2,20 @@ package com.example;
 
 public class Session {
     private String token;
-    private int id;
-    private String username;
+    private int user_id;
 
-    Session(String token, User user) {
+    Session(String token, int user_id) {
         this.token = token;
-        this.id = user.getId();
-        this.username = user.getUsername();
+        this.user_id = user_id;
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
     public String getToken() {
         return token;
     }
 
-    @SuppressWarnings({"unused", "WeakerAccess"})
-    public int getId() {
-        return id;
-    }
-
     @SuppressWarnings("unused")
-    public String getUsername() {
-        return username;
+    public int getUser_id() {
+        return user_id;
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
@@ -32,18 +24,16 @@ public class Session {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Session that = (Session) o;
+        Session session = (Session) o;
 
-        if (id != that.id) return false;
-        if (token != null ? !token.equals(that.token) : that.token != null) return false;
-        return username != null ? username.equals(that.username) : that.username == null;
+        if (user_id != session.user_id) return false;
+        return token != null ? token.equals(session.token) : session.token == null;
     }
 
     @Override
     public int hashCode() {
         int result = token != null ? token.hashCode() : 0;
-        result = 31 * result + id;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + user_id;
         return result;
     }
 
@@ -51,8 +41,7 @@ public class Session {
     public String toString() {
         return "Session{" +
                 "token='" + token + '\'' +
-                ", id=" + id +
-                ", username='" + username + '\'' +
+                ", user_id=" + user_id +
                 '}';
     }
 }

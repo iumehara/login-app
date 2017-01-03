@@ -15,14 +15,14 @@ import static org.mockito.Mockito.when;
 public class LoginRepoTest {
     private LoginRepo repo;
     private UserRepo userRepo;
-    private SessionRepo sessionRepo;
+    private UserSessionRepo userSessionRepo;
 
     @Before
     public void setUp() throws Exception {
         userRepo = mock(UserRepo.class);
-        sessionRepo = mock(SessionRepo.class);
+        userSessionRepo = mock(UserSessionRepo.class);
 
-        repo = new LoginRepo(userRepo, sessionRepo);
+        repo = new LoginRepo(userRepo, userSessionRepo);
     }
 
     @Test
@@ -31,16 +31,16 @@ public class LoginRepoTest {
         when(userRepo.validate(any(LoginCredentials.class)))
                 .thenReturn(Optional.of(user));
 
-        when(sessionRepo.create(any(User.class)))
-                .thenReturn(Optional.of(new Session("token", user)));
+        when(userSessionRepo.create(any(User.class)))
+                .thenReturn(Optional.of(new UserSession("token", user)));
 
-        Optional<Session> maybeUserSession = repo.getUserSession("adam", "secret");
+        Optional<UserSession> maybeUserSession = repo.getUserSession("adam", "secret");
 
-        Session session = maybeUserSession.get();
+        UserSession userSession = maybeUserSession.get();
 
-        assertThat(session.getUsername(), is("adam"));
-        assertThat(session.getId(), is(1));
-        assertThat(session.getToken(), is("token"));
+        assertThat(userSession.getUsername(), is("adam"));
+        assertThat(userSession.getId(), is(1));
+        assertThat(userSession.getToken(), is("token"));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class LoginRepoTest {
         when(userRepo.validate(any(LoginCredentials.class)))
                 .thenReturn(Optional.empty());
 
-        Optional<Session> maybeUserSession = repo.getUserSession("adam", "secret");
+        Optional<UserSession> maybeUserSession = repo.getUserSession("adam", "secret");
 
         assertThat(maybeUserSession.isPresent(), is(false));
     }
@@ -58,10 +58,10 @@ public class LoginRepoTest {
         when(userRepo.validate(any(LoginCredentials.class)))
                 .thenReturn(Optional.of(new User(1, "adam")));
 
-        when(sessionRepo.create(any(User.class)))
+        when(userSessionRepo.create(any(User.class)))
                 .thenReturn(Optional.empty());
 
-        Optional<Session> maybeUserSession = repo.getUserSession("adam", "secret");
+        Optional<UserSession> maybeUserSession = repo.getUserSession("adam", "secret");
 
         assertThat(maybeUserSession.isPresent(), is(false));
     }

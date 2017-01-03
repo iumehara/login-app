@@ -16,6 +16,7 @@ public class LoginCredentials {
         return username;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getPassword() {
         return password;
     }
