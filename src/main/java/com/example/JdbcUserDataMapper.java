@@ -1,8 +1,11 @@
 package com.example;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 @Repository
@@ -57,6 +60,24 @@ public class JdbcUserDataMapper implements UserDataMapper {
 
     @Override
     public Optional<User> create(UserParams userParams) {
-        return null;
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        jdbcInsert.withTableName("users")
+                .usingGeneratedKeyColumns("id");
+
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("name", userParams.getUsername());
+        parameters.put("password", userParams.getPassword());
+
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource(parameters);
+
+        try {
+            int id = jdbcInsert.executeAndReturnKey(sqlParameterSource).intValue();
+
+            User user = new User(id, userParams.getUsername());
+
+            return Optional.of(user);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }

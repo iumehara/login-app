@@ -41,10 +41,10 @@ public class UsersControllerTest {
 
     @Test
     public void test_create_returnsCreatedUser_onSuccess() throws Exception {
-        when(mockRepo.create(new UserParams("adam")))
+        when(mockRepo.create(new UserParams("adam", "secret")))
             .thenReturn(Optional.of(new User(1, "adam" )));
 
-        String userPayload = "{\"username\":\"adam\"}";
+        String userPayload = "{\"username\":\"adam\",\"password\":\"secret\"}";
 
         mockController.perform(
                 post("/users")

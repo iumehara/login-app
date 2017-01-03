@@ -11,12 +11,12 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 public class JdbcUserDataMapperTest {
     private JdbcTemplate jdbcTemplate;
+    private JdbcUserDataMapper dataMapper;
 
     @Before
     public void setUp() throws Exception {
@@ -32,6 +32,8 @@ public class JdbcUserDataMapperTest {
         params.put("password", "secret");
 
         insert.execute(params);
+
+        dataMapper = new JdbcUserDataMapper(jdbcTemplate);
     }
 
     @After
@@ -41,7 +43,6 @@ public class JdbcUserDataMapperTest {
 
     @Test
     public void test_findByUsername_returnsUserOnSuccess() throws Exception {
-        JdbcUserDataMapper dataMapper = new JdbcUserDataMapper(jdbcTemplate);
         Optional<User> maybeUser = dataMapper.findByUsername("adam");
 
         User user = maybeUser.get();
@@ -52,8 +53,6 @@ public class JdbcUserDataMapperTest {
 
     @Test
     public void test_findByUsername_returnsEmptyOnFailure() throws Exception {
-        JdbcUserDataMapper dataMapper = new JdbcUserDataMapper(jdbcTemplate);
-
         Optional<User> maybeUser = dataMapper.findByUsername("bob");
 
         assertThat(maybeUser.isPresent(), is(false));
@@ -61,8 +60,6 @@ public class JdbcUserDataMapperTest {
 
     @Test
     public void test_validate_returnsUserOnSuccess() throws Exception {
-        JdbcUserDataMapper dataMapper = new JdbcUserDataMapper(jdbcTemplate);
-
         Optional<User> maybeUser = dataMapper.validate(
                 new LoginCredentials("adam", "secret")
         );
@@ -75,12 +72,30 @@ public class JdbcUserDataMapperTest {
 
     @Test
     public void test_validate_returnsEmptyOnFailure() throws Exception {
-        JdbcUserDataMapper dataMapper = new JdbcUserDataMapper(jdbcTemplate);
-
         Optional<User> maybeUser = dataMapper.validate(
                 new LoginCredentials("adam", "wrongPassword")
         );
 
         assertThat(maybeUser.isPresent(), is(false));
+    }
+
+    @Test
+    public void test_create_returnsUserOnSuccess() throws Exception {
+        UserParams userParams = new UserParams("adam", "secret");
+
+        Optional<User> maybeUser = dataMapper.create(userParams);
+
+        User user = maybeUser.get();
+        assertThat(user.getUsername(), is("adam"));
+        assertNotNull(user.getId());
+    }
+
+    @Test
+    public void test_create_returnsEmptyOnFailure() throws Exception {
+        UserParams userParams = new UserParams("adam", null);
+
+        Optional<User> maybeUser = dataMapper.create(userParams);
+
+        assertFalse(maybeUser.isPresent());
     }
 }

@@ -52,7 +52,7 @@ public class UserRepoTest {
 
     @Test
     public void test_create_returnsUser_onSuccess() throws Exception {
-        UserParams userParams = new UserParams("adam");
+        UserParams userParams = new UserParams("adam", "secret");
         dataMapper.create_returnValue = Optional.of(new User(1, "adam"));
 
 

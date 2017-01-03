@@ -11,7 +11,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
-public class JdbcUserSessionDataMapperTest {
+public class JdbcSessionDataMapperTest {
     private JdbcTemplate jdbcTemplate;
 
     @Before
