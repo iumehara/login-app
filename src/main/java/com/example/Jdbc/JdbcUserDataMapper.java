@@ -1,5 +1,9 @@
-package com.example;
+package com.example.Jdbc;
 
+import com.example.LoginCredentials;
+import com.example.User;
+import com.example.UserDataMapper;
+import com.example.UserParams;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -12,7 +16,7 @@ import java.util.Optional;
 public class JdbcUserDataMapper implements UserDataMapper {
     private JdbcTemplate jdbcTemplate;
 
-    JdbcUserDataMapper(JdbcTemplate jdbcTemplate) {
+    public JdbcUserDataMapper(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

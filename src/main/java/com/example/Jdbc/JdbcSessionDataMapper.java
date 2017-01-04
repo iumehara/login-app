@@ -1,5 +1,6 @@
-package com.example;
+package com.example.Jdbc;
 
+import com.example.Session;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Types;
@@ -8,7 +9,7 @@ import java.util.Optional;
 public class JdbcSessionDataMapper {
     private JdbcTemplate jdbcTemplate;
 
-    JdbcSessionDataMapper(JdbcTemplate jdbcTemplate) {
+    public JdbcSessionDataMapper(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

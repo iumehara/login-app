@@ -1,5 +1,8 @@
-package com.example;
+package com.example.Jdbc;
 
+import com.example.LoginCredentials;
+import com.example.User;
+import com.example.UserParams;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

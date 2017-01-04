@@ -4,7 +4,7 @@ public class Session {
     private String token;
     private int user_id;
 
-    Session(String token, int user_id) {
+    public Session(String token, int user_id) {
         this.token = token;
         this.user_id = user_id;
     }

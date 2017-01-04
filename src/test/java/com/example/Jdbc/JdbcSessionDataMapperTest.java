@@ -1,5 +1,6 @@
-package com.example;
+package com.example.Jdbc;
 
+import com.example.Session;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

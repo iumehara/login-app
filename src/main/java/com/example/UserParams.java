@@ -7,7 +7,7 @@ public class UserParams {
     @SuppressWarnings("unused")
     public UserParams() {}
 
-    UserParams(String username, String password) {
+    public UserParams(String username, String password) {
         this.username = username;
         this.password = password;
     }
