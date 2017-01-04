@@ -16,20 +16,22 @@ import java.util.Optional;
 public class JdbcUserDataMapper implements UserDataMapper {
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcUserDataMapper(JdbcTemplate jdbcTemplate) {
+    JdbcUserDataMapper(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public Optional<User> findByUsername(String username) {
-        String queryString = "SELECT * FROM users where name=?";
-
+        String queryString = "SELECT u.id, u.name, r.name AS role " +
+                "FROM users AS u LEFT JOIN roles AS r ON u.role_id=r.id " +
+                "WHERE u.name=?";
         try {
             User user = jdbcTemplate.queryForObject(
                     queryString,
                     (rs, i) -> new User(
                             rs.getInt("id"),
-                            rs.getString("name")
+                            rs.getString("name"),
+                            rs.getString("role")
                     ),
                     username
             );
@@ -41,7 +43,9 @@ public class JdbcUserDataMapper implements UserDataMapper {
 
     @Override
     public Optional<User> validate(LoginCredentials credentials) {
-        String queryString = "SELECT * FROM users where name=? AND password=?";
+        String queryString = "SELECT u.id, u.name, r.name AS role " +
+                "FROM users AS u LEFT JOIN roles AS r ON u.role_id=r.id " +
+                "WHERE u.name=? AND u.password=?";
 
         String username = credentials.getUsername();
         String password = credentials.getPassword();
@@ -51,7 +55,8 @@ public class JdbcUserDataMapper implements UserDataMapper {
                     queryString,
                     (rs, i) -> new User(
                             rs.getInt("id"),
-                            rs.getString("name")
+                            rs.getString("name"),
+                            rs.getString("role")
                     ),
                     username,
                     password
@@ -77,7 +82,7 @@ public class JdbcUserDataMapper implements UserDataMapper {
         try {
             int id = jdbcInsert.executeAndReturnKey(sqlParameterSource).intValue();
 
-            User user = new User(id, userParams.getUsername());
+            User user = new User(id, userParams.getUsername(), "staff");
 
             return Optional.of(user);
         } catch (Exception e) {

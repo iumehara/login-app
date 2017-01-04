@@ -31,7 +31,7 @@ public class UsersControllerTest {
     @Test
     public void test_show_returnsUser() throws Exception {
         when(mockRepo.findByUsername("adam"))
-                .thenReturn(Optional.of(new User(1, "adam")));
+                .thenReturn(Optional.of(new User(1, "adam", "staff")));
 
         mockController.perform(get("/users/adam"))
                 .andExpect(status().isOk())
@@ -42,7 +42,7 @@ public class UsersControllerTest {
     @Test
     public void test_create_returnsCreatedUser_onSuccess() throws Exception {
         when(mockRepo.create(new UserParams("adam", "secret")))
-            .thenReturn(Optional.of(new User(1, "adam" )));
+            .thenReturn(Optional.of(new User(1, "adam", "staff")));
 
         String userPayload = "{\"username\":\"adam\",\"password\":\"secret\"}";
 

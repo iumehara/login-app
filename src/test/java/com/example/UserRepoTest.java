@@ -23,7 +23,7 @@ public class UserRepoTest {
 
     @Test
     public void test_findByUsername_returnsUser_onSuccess() throws Exception {
-        dataMapper.findByUsername_returnValue = Optional.of(new User(1, "adam"));
+        dataMapper.findByUsername_returnValue = Optional.of(new User(1, "adam", "staff"));
 
 
         Optional<User> maybeUser = repo.findByUsername("adam");
@@ -37,7 +37,7 @@ public class UserRepoTest {
 
     @Test
     public void test_validate_returnsUser_onSuccess() throws Exception {
-        dataMapper.validate_returnValue = Optional.of(new User(1, "adam"));
+        dataMapper.validate_returnValue = Optional.of(new User(1, "adam", "staff"));
         LoginCredentials credentials = new LoginCredentials("adam", "secret");
 
 
@@ -53,7 +53,7 @@ public class UserRepoTest {
     @Test
     public void test_create_returnsUser_onSuccess() throws Exception {
         UserParams userParams = new UserParams("adam", "secret");
-        dataMapper.create_returnValue = Optional.of(new User(1, "adam"));
+        dataMapper.create_returnValue = Optional.of(new User(1, "adam", "staff"));
 
 
         Optional<User> maybeUser = repo.create(userParams);

@@ -27,7 +27,7 @@ public class LoginRepoTest {
 
     @Test
     public void test_getUserSession_returnsUserSessionOnSuccess() throws Exception {
-        User user = new User(1, "adam");
+        User user = new User(1, "adam", "staff");
         when(userRepo.validate(any(LoginCredentials.class)))
                 .thenReturn(Optional.of(user));
 
@@ -59,7 +59,7 @@ public class LoginRepoTest {
     @Test
     public void test_getUserSession_returnsEmptyOnFailedTokenGeneration() throws Exception {
         when(userRepo.validate(any(LoginCredentials.class)))
-                .thenReturn(Optional.of(new User(1, "adam")));
+                .thenReturn(Optional.of(new User(1, "adam", "staff")));
 
         when(userSessionRepo.create(any(User.class)))
                 .thenReturn(Optional.empty());

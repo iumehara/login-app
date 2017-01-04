@@ -32,7 +32,7 @@ public class LoginControllerTest {
         when(repo.getUserSession("adam", "secreta"))
                 .thenReturn(Optional.of(new UserSession(
                         new Session("XXXFAKETOKENXXX", 1),
-                        new User(1, "adam")
+                        new User(1, "adam", "staff")
                 )));
 
         mockController.perform(post("/login")

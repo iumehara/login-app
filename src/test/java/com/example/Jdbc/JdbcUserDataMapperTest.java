@@ -25,18 +25,37 @@ public class JdbcUserDataMapperTest {
     public void setUp() throws Exception {
         jdbcTemplate = JdbcTestTemplate.create();
 
+        insertUserIntoDatabase();
+        insertRoleIntoDatabase("staff");
+        insertRoleIntoDatabase("admin");
+
+        dataMapper = new JdbcUserDataMapper(jdbcTemplate);
+    }
+
+    private void insertUserIntoDatabase() {
         SimpleJdbcInsert insert = new SimpleJdbcInsert(this.jdbcTemplate)
                 .withTableName("users")
-                .usingColumns("name", "password")
+                .usingColumns("name", "password", "role_id")
                 .usingGeneratedKeyColumns("id");
 
         Map<String, Object> params = new HashMap<>();
         params.put("name", "adam");
         params.put("password", "secret");
+        params.put("role_id", 1);
 
         insert.execute(params);
+    }
 
-        dataMapper = new JdbcUserDataMapper(jdbcTemplate);
+    private void insertRoleIntoDatabase(String role) {
+        SimpleJdbcInsert insert = new SimpleJdbcInsert(this.jdbcTemplate)
+                .withTableName("roles")
+                .usingColumns("name")
+                .usingGeneratedKeyColumns("id");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", role);
+
+        insert.execute(params);
     }
 
     @After
@@ -50,8 +69,9 @@ public class JdbcUserDataMapperTest {
 
         User user = maybeUser.get();
 
-        assertThat(user.getUsername(), is("adam"));
         assertNotNull(user.getId());
+        assertThat(user.getUsername(), is("adam"));
+        assertThat(user.getRole(), is("staff"));
     }
 
     @Test
@@ -69,8 +89,9 @@ public class JdbcUserDataMapperTest {
 
         User user = maybeUser.get();
 
-        assertThat(user.getUsername(), is("adam"));
         assertNotNull(user.getId());
+        assertThat(user.getUsername(), is("adam"));
+        assertThat(user.getRole(), is("staff"));
     }
 
     @Test

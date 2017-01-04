@@ -21,7 +21,7 @@ public class UserSessionRepoTest {
 
     @Test
     public void create_returnsSessionOnSuccess() throws Exception {
-        User user = new User(1, "adam");
+        User user = new User(1, "adam", "staff");
         sessionDataMapper.create_returnValue = Optional.of(
                 new Session("token", user.getId())
         );
@@ -38,7 +38,7 @@ public class UserSessionRepoTest {
     @Test
     public void create_returnsEmptyOnFailure() throws Exception {
         sessionDataMapper.create_returnValue = Optional.empty();
-        User user = new User(1, "adam");
+        User user = new User(1, "adam", "staff");
 
         Optional<UserSession> maybeSession = repo.create(user);
 
