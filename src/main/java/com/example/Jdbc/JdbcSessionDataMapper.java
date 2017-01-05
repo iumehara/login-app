@@ -1,6 +1,7 @@
 package com.example.Jdbc;
 
 import com.example.Session;
+import com.example.SessionDataMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +9,7 @@ import java.sql.Types;
 import java.util.Optional;
 
 @Repository
-public class JdbcSessionDataMapper {
+public class JdbcSessionDataMapper implements SessionDataMapper{
     private JdbcTemplate jdbcTemplate;
 
     JdbcSessionDataMapper(JdbcTemplate jdbcTemplate) {
@@ -28,6 +29,22 @@ public class JdbcSessionDataMapper {
                 return Optional.empty();
             }
         } catch(Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<Integer> validate(String token) {
+        String queryString = "SELECT user_id FROM sessions WHERE token=?";
+
+        try {
+            Integer userId = jdbcTemplate.queryForObject(
+                    queryString,
+                    (rs, rowNum) -> rs.getInt("user_id"),
+                    token
+            );
+            return Optional.of(userId);
+        } catch (Exception e) {
             return Optional.empty();
         }
     }

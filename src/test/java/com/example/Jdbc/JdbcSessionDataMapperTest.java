@@ -30,7 +30,7 @@ public class JdbcSessionDataMapperTest {
         JdbcSessionDataMapper dataMapper = new JdbcSessionDataMapper(jdbcTemplate);
 
         Optional<Session> maybeSession = dataMapper.create(2, "secondToken");
-        System.out.println("maybeSession = " + maybeSession);
+
         assertThat(maybeSession.get().getToken(), is("secondToken"));
     }
 }
