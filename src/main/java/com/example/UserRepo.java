@@ -5,22 +5,22 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-class UserRepo {
+public class UserRepo {
     private UserDataMapper dataMapper;
 
-    UserRepo(UserDataMapper dataMapper) {
+    public UserRepo(UserDataMapper dataMapper) {
         this.dataMapper = dataMapper;
     }
 
-    Optional<User> findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
         return dataMapper.findByUsername(username);
     }
 
-    Optional<User> validate(LoginCredentials credentials) {
+    public Optional<User> validate(LoginCredentials credentials) {
         return dataMapper.validate(credentials);
     }
 
-    Optional<User> create(UserParams userParams) {
+    public Optional<User> create(UserParams userParams) {
         Optional<Integer> maybeRoleId = dataMapper.findRoleIdByName(userParams.getRole());
 
         if(!maybeRoleId.isPresent()) return Optional.empty();

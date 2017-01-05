@@ -16,7 +16,7 @@ import java.util.Optional;
 public class JdbcUserDataMapper implements UserDataMapper {
     private JdbcTemplate jdbcTemplate;
 
-    JdbcUserDataMapper(JdbcTemplate jdbcTemplate) {
+    public JdbcUserDataMapper(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

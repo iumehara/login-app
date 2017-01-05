@@ -1,4 +1,7 @@
-package com.example;
+package com.exampleTest;
+
+import com.example.Session;
+import com.example.SessionDataMapper;
 
 import java.util.Optional;
 

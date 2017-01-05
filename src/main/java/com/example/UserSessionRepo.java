@@ -5,14 +5,14 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-class UserSessionRepo {
+public class UserSessionRepo {
     private SessionDataMapper sessionDataMapper;
 
-    UserSessionRepo(SessionDataMapper sessionDataMapper) {
+    public UserSessionRepo(SessionDataMapper sessionDataMapper) {
         this.sessionDataMapper = sessionDataMapper;
     }
 
-    Optional<UserSession> create(User user) {
+    public Optional<UserSession> create(User user) {
         String token = TokenGenerator.createRandom();
 
         Optional<Session> maybeSession = sessionDataMapper.create(user.getId(), token);

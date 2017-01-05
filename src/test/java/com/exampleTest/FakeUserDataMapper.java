@@ -1,4 +1,9 @@
-package com.example;
+package com.exampleTest;
+
+import com.example.LoginCredentials;
+import com.example.User;
+import com.example.UserData;
+import com.example.UserDataMapper;
 
 import java.util.Optional;
 

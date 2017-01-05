@@ -6,16 +6,16 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-class LoginRepo {
+public class LoginRepo {
     private UserRepo userRepo;
     private UserSessionRepo userSessionRepo;
 
-    LoginRepo(UserRepo userRepo, UserSessionRepo userSessionRepo) {
+    public LoginRepo(UserRepo userRepo, UserSessionRepo userSessionRepo) {
         this.userRepo = userRepo;
         this.userSessionRepo = userSessionRepo;
     }
 
-    Optional<UserSession> getUserSession(String username, String password) {
+    public Optional<UserSession> getUserSession(String username, String password) {
         Optional<User> maybeUser = userRepo.validate(new LoginCredentials(username, password));
         if(!maybeUser.isPresent()) {
             return Optional.empty();

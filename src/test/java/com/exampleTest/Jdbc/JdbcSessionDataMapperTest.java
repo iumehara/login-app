@@ -1,5 +1,6 @@
-package com.example.Jdbc;
+package com.exampleTest.Jdbc;
 
+import com.example.Jdbc.JdbcSessionDataMapper;
 import com.example.Session;
 import org.junit.After;
 import org.junit.Before;

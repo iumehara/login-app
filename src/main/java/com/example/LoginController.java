@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     private LoginRepo repo;
 
-    LoginController(LoginRepo repo) {
+    public LoginController(LoginRepo repo) {
         this.repo = repo;
     }
 

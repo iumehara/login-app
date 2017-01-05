@@ -1,5 +1,6 @@
-package com.example;
+package com.exampleTest;
 
+import com.example.TokenGenerator;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;

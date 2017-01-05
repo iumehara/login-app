@@ -12,7 +12,7 @@ import java.util.Optional;
 public class JdbcSessionDataMapper implements SessionDataMapper{
     private JdbcTemplate jdbcTemplate;
 
-    JdbcSessionDataMapper(JdbcTemplate jdbcTemplate) {
+    public JdbcSessionDataMapper(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

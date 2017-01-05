@@ -1,5 +1,9 @@
-package com.example;
+package com.exampleTest;
 
+import com.example.Session;
+import com.example.User;
+import com.example.UserSession;
+import com.example.UserSessionRepo;
 import org.junit.Before;
 import org.junit.Test;
 

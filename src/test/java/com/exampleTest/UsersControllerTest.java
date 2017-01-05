@@ -1,5 +1,9 @@
-package com.example;
+package com.exampleTest;
 
+import com.example.User;
+import com.example.UserParams;
+import com.example.UserRepo;
+import com.example.UsersController;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;

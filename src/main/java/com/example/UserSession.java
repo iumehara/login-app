@@ -5,7 +5,7 @@ public class UserSession {
     private int id;
     private String username;
 
-    UserSession(Session session, User user) {
+    public UserSession(Session session, User user) {
         this.token = session.getToken();
         this.id = user.getId();
         this.username = user.getUsername();

@@ -1,5 +1,7 @@
-package com.example;
+package com.exampleTest;
 
+import com.example.*;
+import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,7 +60,7 @@ public class UserRepoTest {
         Optional<User> maybeUser = repo.create(userParams);
 
         assertThat(dataMapper.findRoleIdByName_param_roleName, is("staff"));
-        assertThat(dataMapper.create_param_userData, is(new UserData(userParams, 123)));
+        assertThat(dataMapper.create_param_userData, Is.is(new UserData(userParams, 123)));
         User user = maybeUser.get();
         assertThat(user.getId(), equalTo(987));
         assertThat(user.getUsername(), equalTo("adam"));

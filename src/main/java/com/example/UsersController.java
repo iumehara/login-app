@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsersController {
     private UserRepo repo;
 
-    UsersController(UserRepo repo) {
+    public UsersController(UserRepo repo) {
         this.repo = repo;
     }
 
