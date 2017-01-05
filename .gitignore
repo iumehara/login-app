@@ -16,10 +16,5 @@
 *.iml
 *.ipr
 
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+### MySQL ###
+mysql-connector-java*.jar
