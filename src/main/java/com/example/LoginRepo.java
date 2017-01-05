@@ -1,8 +1,11 @@
 package com.example;
 
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 
+@Repository
 class LoginRepo {
     private UserRepo userRepo;
     private UserSessionRepo userSessionRepo;

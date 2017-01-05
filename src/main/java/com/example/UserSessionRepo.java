@@ -1,7 +1,10 @@
 package com.example;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 
+@Repository
 class UserSessionRepo {
     private SessionDataMapper sessionDataMapper;
 

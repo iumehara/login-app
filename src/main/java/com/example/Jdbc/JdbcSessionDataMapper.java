@@ -2,14 +2,16 @@ package com.example.Jdbc;
 
 import com.example.Session;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Types;
 import java.util.Optional;
 
+@Repository
 public class JdbcSessionDataMapper {
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcSessionDataMapper(JdbcTemplate jdbcTemplate) {
+    JdbcSessionDataMapper(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
