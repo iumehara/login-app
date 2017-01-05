@@ -20,11 +20,19 @@ public class FakeUserDataMapper implements UserDataMapper {
         return validate_returnValue;
     }
 
-    Optional<User> create_returnValue;
-    UserParams create_param_userParams;
+    Optional<Integer> create_returnValue;
+    UserData create_param_userData;
     @Override
-    public Optional<User> create(UserParams userParams) {
-        create_param_userParams = userParams;
+    public Optional<Integer> create(UserData userData) {
+        create_param_userData = userData;
         return create_returnValue;
+    }
+
+    Optional<Integer> findRoleIdByName_returnValue;
+    String findRoleIdByName_param_roleName;
+    @Override
+    public Optional<Integer> findRoleIdByName(String roleName) {
+        findRoleIdByName_param_roleName = roleName;
+        return findRoleIdByName_returnValue;
     }
 }

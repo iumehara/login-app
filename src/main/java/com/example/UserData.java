@@ -1,17 +1,17 @@
 package com.example;
 
-public class UserParams {
+public class UserData {
     private String username;
     private String password;
-    private String role;
+    private int roleId;
 
     @SuppressWarnings("unused")
-    public UserParams() {}
+    public UserData() {}
 
-    public UserParams(String username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
+    public UserData(UserParams userParams, Integer roleId) {
+        this.username = userParams.getUsername();
+        this.password = userParams.getPassword();
+        this.roleId = roleId;
     }
 
     public String getUsername() {
@@ -23,9 +23,8 @@ public class UserParams {
         return password;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public String getRole() {
-        return role;
+    public int getRoleId() {
+        return roleId;
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
@@ -34,27 +33,27 @@ public class UserParams {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserParams that = (UserParams) o;
+        UserData userData = (UserData) o;
 
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        return role != null ? role.equals(that.role) : that.role == null;
+        if (roleId != userData.roleId) return false;
+        if (username != null ? !username.equals(userData.username) : userData.username != null) return false;
+        return password != null ? password.equals(userData.password) : userData.password == null;
     }
 
     @Override
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + roleId;
         return result;
     }
 
     @Override
     public String toString() {
-        return "UserParams{" +
+        return "UserData{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
+                ", roleId=" + roleId +
                 '}';
     }
 }

@@ -7,5 +7,7 @@ public interface UserDataMapper {
 
     Optional<User> validate(LoginCredentials credentials);
 
-    Optional<User> create(UserParams userParams);
+    Optional<Integer> create(UserData userData);
+
+    Optional<Integer> findRoleIdByName(String roleName);
 }

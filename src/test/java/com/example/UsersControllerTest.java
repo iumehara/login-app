@@ -36,23 +36,24 @@ public class UsersControllerTest {
         mockController.perform(get("/users/adam"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.username", equalTo("adam")));
+                .andExpect(jsonPath("$.username", equalTo("adam")))
+                .andExpect(jsonPath("$.role", equalTo("staff")));
     }
 
     @Test
     public void test_create_returnsCreatedUser_onSuccess() throws Exception {
-        when(mockRepo.create(new UserParams("adam", "secret")))
+        when(mockRepo.create(new UserParams("adam", "secret", "staff")))
             .thenReturn(Optional.of(new User(1, "adam", "staff")));
 
-        String userPayload = "{\"username\":\"adam\",\"password\":\"secret\"}";
-
+        String userPayload = "{\"username\":\"adam\",\"password\":\"secret\",\"role\":\"staff\"}";
         mockController.perform(
                 post("/users")
                         .contentType(APPLICATION_JSON_UTF8_VALUE)
                         .content(userPayload)
         )
                 .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.username", is("adam")))
-                .andExpect(jsonPath("$.id").exists());
+                .andExpect(jsonPath("$.role", is("staff")));
     }
 }

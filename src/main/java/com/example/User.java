@@ -11,6 +11,11 @@ public class User {
         this.role = role;
     }
 
+    public User(int id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
     @SuppressWarnings({"unused", "WeakerAccess"})
     public int getId() {
         return id;

@@ -2,8 +2,8 @@ package com.example.Jdbc;
 
 import com.example.LoginCredentials;
 import com.example.User;
+import com.example.UserData;
 import com.example.UserDataMapper;
-import com.example.UserParams;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -68,23 +68,37 @@ public class JdbcUserDataMapper implements UserDataMapper {
     }
 
     @Override
-    public Optional<User> create(UserParams userParams) {
+    public Optional<Integer> create(UserData userData) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("users")
                 .usingGeneratedKeyColumns("id");
 
         HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("name", userParams.getUsername());
-        parameters.put("password", userParams.getPassword());
+        parameters.put("name", userData.getUsername());
+        parameters.put("password", userData.getPassword());
+        parameters.put("role_id", userData.getRoleId());
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource(parameters);
 
         try {
-            int id = jdbcInsert.executeAndReturnKey(sqlParameterSource).intValue();
+            Integer id = jdbcInsert.executeAndReturnKey(sqlParameterSource).intValue();
+            return Optional.of(id);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
 
-            User user = new User(id, userParams.getUsername(), "staff");
+    @Override
+    public Optional<Integer> findRoleIdByName(String roleName) {
+        String queryString = "SELECT * from roles where name=?";
 
-            return Optional.of(user);
+        try {
+            Integer roleId = jdbcTemplate.queryForObject(
+                    queryString,
+                    (rs, i) -> rs.getInt("id"),
+                    roleName
+            );
+            return Optional.of(roleId);
         } catch (Exception e) {
             return Optional.empty();
         }

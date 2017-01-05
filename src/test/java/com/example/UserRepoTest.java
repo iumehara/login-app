@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
@@ -52,16 +51,17 @@ public class UserRepoTest {
 
     @Test
     public void test_create_returnsUser_onSuccess() throws Exception {
-        UserParams userParams = new UserParams("adam", "secret");
-        dataMapper.create_returnValue = Optional.of(new User(1, "adam", "staff"));
+        dataMapper.findRoleIdByName_returnValue = Optional.of(123);
+        dataMapper.create_returnValue = Optional.of(987);
 
-
+        UserParams userParams = new UserParams("adam", "secret", "staff");
         Optional<User> maybeUser = repo.create(userParams);
 
-
-        assertThat(dataMapper.create_param_userParams, is(userParams));
+        assertThat(dataMapper.findRoleIdByName_param_roleName, is("staff"));
+        assertThat(dataMapper.create_param_userData, is(new UserData(userParams, 123)));
         User user = maybeUser.get();
-        assertNotNull(user.getId());
+        assertThat(user.getId(), equalTo(987));
         assertThat(user.getUsername(), equalTo("adam"));
+        assertThat(user.getRole(), equalTo("staff"));
     }
 }

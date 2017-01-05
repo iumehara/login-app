@@ -2,6 +2,7 @@ package com.example.Jdbc;
 
 import com.example.LoginCredentials;
 import com.example.User;
+import com.example.UserData;
 import com.example.UserParams;
 import org.junit.After;
 import org.junit.Before;
@@ -105,21 +106,25 @@ public class JdbcUserDataMapperTest {
 
     @Test
     public void test_create_returnsUserOnSuccess() throws Exception {
-        UserParams userParams = new UserParams("adam", "secret");
+        UserData userData = new UserData(
+                new UserParams("adam", "secret", "staff"),
+                1
+        );
 
-        Optional<User> maybeUser = dataMapper.create(userParams);
+        Optional<Integer> maybeInteger = dataMapper.create(userData);
 
-        User user = maybeUser.get();
-        assertThat(user.getUsername(), is("adam"));
-        assertNotNull(user.getId());
+        assertNotNull(maybeInteger.get());
     }
 
     @Test
     public void test_create_returnsEmptyOnFailure() throws Exception {
-        UserParams userParams = new UserParams("adam", null);
+        UserData userData = new UserData(
+                new UserParams("adam", null, "staff"),
+                1
+        );
 
-        Optional<User> maybeUser = dataMapper.create(userParams);
+        Optional<Integer> maybeInteger = dataMapper.create(userData);
 
-        assertFalse(maybeUser.isPresent());
+        assertFalse(maybeInteger.isPresent());
     }
 }

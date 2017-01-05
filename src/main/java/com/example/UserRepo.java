@@ -21,6 +21,16 @@ class UserRepo {
     }
 
     Optional<User> create(UserParams userParams) {
-        return dataMapper.create(userParams);
+        Optional<Integer> maybeRoleId = dataMapper.findRoleIdByName(userParams.getRole());
+
+        if(!maybeRoleId.isPresent()) return Optional.empty();
+
+        Optional<Integer> maybeUserId = dataMapper.create(new UserData(userParams, maybeRoleId.get()));
+
+        if(!maybeUserId.isPresent()) return Optional.empty();
+
+        User user = new User(maybeUserId.get(), userParams.getUsername(), userParams.getRole());
+
+        return Optional.of(user);
     }
 }
