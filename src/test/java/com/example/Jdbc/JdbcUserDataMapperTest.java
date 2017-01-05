@@ -62,6 +62,8 @@ public class JdbcUserDataMapperTest {
     @After
     public void tearDown() throws Exception {
         jdbcTemplate.update("DELETE FROM users");
+        jdbcTemplate.update("DELETE FROM roles");
+        jdbcTemplate.update("ALTER table roles AUTO_INCREMENT=1");
     }
 
     @Test
@@ -126,5 +128,19 @@ public class JdbcUserDataMapperTest {
         Optional<Integer> maybeInteger = dataMapper.create(userData);
 
         assertFalse(maybeInteger.isPresent());
+    }
+
+    @Test
+    public void test_findRoleIdByName_returnsIntegerOnSuccess() throws Exception {
+        Optional<Integer> maybeRoleId = dataMapper.findRoleIdByName("staff");
+
+        assertNotNull(maybeRoleId.get());
+    }
+
+    @Test
+    public void test_findRoleIdByName_returnsEmptyOnFailure() throws Exception {
+        Optional<Integer> maybeRoleId = dataMapper.findRoleIdByName(null);
+
+        assertFalse(maybeRoleId.isPresent());
     }
 }
