@@ -1,6 +1,6 @@
-.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
+/server/**/.gradle
+/server/**/build
+!/server/**/gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
 .apt_generated
@@ -15,6 +15,3 @@
 *.iws
 *.iml
 *.ipr
-
-### MySQL ###
-mysql-connector-java*.jar
