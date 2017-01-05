@@ -1,3 +1,4 @@
+#### SERVER ####
 /server/**/.gradle
 /server/**/build
 !/server/**/gradle/wrapper/gradle-wrapper.jar
@@ -15,3 +16,9 @@
 *.iws
 *.iml
 *.ipr
+
+
+#### CLIENT ####
+### Node ###
+/client/**/node_modules
+
