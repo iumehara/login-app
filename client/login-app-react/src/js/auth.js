@@ -1,4 +1,4 @@
-
+import localStorage from 'localStorage'
 
 module.exports = {
   login(email, pass, redirectCallback) {
