@@ -2,6 +2,7 @@ package com.example;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -10,6 +11,10 @@ public class UserRepo {
 
     public UserRepo(UserDataMapper dataMapper) {
         this.dataMapper = dataMapper;
+    }
+
+    public List<User> all() {
+        return null;
     }
 
     public Optional<User> findByUsername(String username) {

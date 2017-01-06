@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
@@ -30,6 +31,18 @@ public class UsersControllerTest {
         mockRepo = mock(UserRepo.class);
         UsersController controller = new UsersController(mockRepo);
         mockController = standaloneSetup(controller).build();
+    }
+
+    @Test
+    public void test_index_returnsUsers() throws Exception {
+        when(mockRepo.all())
+                .thenReturn(Collections.singletonList(new User(1, "adam", "staff")));
+
+        mockController.perform(get("/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id", equalTo(1)))
+                .andExpect(jsonPath("$[0].username", equalTo("adam")))
+                .andExpect(jsonPath("$[0].role", equalTo("staff")));
     }
 
     @Test

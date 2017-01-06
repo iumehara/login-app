@@ -3,6 +3,8 @@ package com.example;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("users")
 public class UsersController {
@@ -10,6 +12,11 @@ public class UsersController {
 
     public UsersController(UserRepo repo) {
         this.repo = repo;
+    }
+
+    @GetMapping("")
+    public List<User> index() {
+        return repo.all();
     }
 
     @GetMapping("{username}")
