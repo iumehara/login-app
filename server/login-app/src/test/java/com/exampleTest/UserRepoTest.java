@@ -5,6 +5,8 @@ import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
@@ -20,6 +22,18 @@ public class UserRepoTest {
     public void setUp() throws Exception {
         dataMapper = new FakeUserDataMapper();
         repo = new UserRepo(dataMapper);
+    }
+
+    @Test
+    public void test_all_returnsUSers_onSuccess() throws Exception {
+        dataMapper.all_returnValue = Collections.singletonList(new User(1, "adam", "staff"));
+
+        List<User> users = repo.all();
+
+        User user = users.get(0);
+        assertThat(user.getId(), equalTo(1));
+        assertThat(user.getUsername(), equalTo("adam"));
+        assertThat(user.getRole(), equalTo("staff"));
     }
 
     @Test

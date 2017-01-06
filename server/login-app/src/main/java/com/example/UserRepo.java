@@ -14,7 +14,7 @@ public class UserRepo {
     }
 
     public List<User> all() {
-        return null;
+        return dataMapper.all();
     }
 
     public Optional<User> findByUsername(String username) {

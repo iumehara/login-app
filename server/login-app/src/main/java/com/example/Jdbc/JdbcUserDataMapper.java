@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,6 +19,11 @@ public class JdbcUserDataMapper implements UserDataMapper {
 
     public JdbcUserDataMapper(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<User> all() {
+        return null;
     }
 
     @Override

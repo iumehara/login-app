@@ -5,10 +5,17 @@ import com.example.User;
 import com.example.UserData;
 import com.example.UserDataMapper;
 
+import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class FakeUserDataMapper implements UserDataMapper {
+    List<User> all_returnValue;
+    @Override
+    public List<User> all() {
+        return all_returnValue;
+    }
+
     Optional<User> findByUsername_returnValue;
     String findByUsername_param_username;
     @Override
