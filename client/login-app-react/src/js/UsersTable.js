@@ -9,9 +9,10 @@ class UsersTable extends React.Component {
   render() {
     let users = this.props.users.map((user) => {
       return (
-        <tr key={user.id}>
+        <tr className={user.username} key={user.id}>
           <td>{user.id}</td>
-          <td>{user.name}</td>
+          <td>{user.username}</td>
+          <td>{user.role}</td>
         </tr>
       )
     })
@@ -22,6 +23,7 @@ class UsersTable extends React.Component {
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Role</th>
           </tr>
         </thead>
         <tbody>
@@ -35,8 +37,9 @@ class UsersTable extends React.Component {
 UsersTable.propTypes = {
   users: React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      id: React.PropTypes.string,
-      name: React.PropTypes.string
+      id: React.PropTypes.number,
+      name: React.PropTypes.string,
+      role: React.PropTypes.string
     }).isRequired
   ).isRequired
 }

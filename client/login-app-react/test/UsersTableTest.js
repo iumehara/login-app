@@ -6,17 +6,21 @@ import UsersTable from '../src/js/UsersTable'
 describe('UsersTable', () => {
   it('displays the component', () => {
     let users = [
-      {id: '1', name: 'adam'},
-      {id: '2', name: 'bob'},
-      {id: '3', name: 'cam'},
-      {id: '4', name: 'dan'}
+      {id: 1, username: 'adam', role: 'staff'},
+      {id: 2, username: 'bob', role: 'staff'},
+      {id: 3, username: 'cam', role: 'admin'},
+      {id: 4, username: 'dan', role: 'admin'}
     ]
 
-    const userList = shallow(<UsersTable users={users}/>)
+    const usersTable = shallow(<UsersTable users={users}/>)
 
-    expect(userList.contains(<tr><td>1</td><td>adam</td></tr>)).toBe(true)
-    expect(userList.contains(<tr><td>2</td><td>bob</td></tr>)).toBe(true)
-    expect(userList.contains(<tr><td>3</td><td>cam</td></tr>)).toBe(true)
-    expect(userList.contains(<tr><td>4</td><td>dan</td></tr>)).toBe(true)
+    expect(usersTable.find('.adam').contains(<td>adam</td>)).toBe(true)
+    expect(usersTable.find('.adam').contains(<td>staff</td>)).toBe(true)
+    expect(usersTable.find('.bob').contains(<td>bob</td>)).toBe(true)
+    expect(usersTable.find('.bob').contains(<td>staff</td>)).toBe(true)
+    expect(usersTable.find('.cam').contains(<td>cam</td>)).toBe(true)
+    expect(usersTable.find('.cam').contains(<td>admin</td>)).toBe(true)
+    expect(usersTable.find('.dan').contains(<td>dan</td>)).toBe(true)
+    expect(usersTable.find('.dan').contains(<td>admin</td>)).toBe(true)
   })
 })

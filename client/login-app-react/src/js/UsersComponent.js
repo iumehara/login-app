@@ -9,18 +9,20 @@ class UsersComponent extends React.Component {
   }
 
   getUsers() {
-    this.setState({
-      users: [
-        {id: '1', name: 'adam'},
-        {id: '2', name: 'bob'},
-        {id: '3', name: 'cam'},
-        {id: '4', name: 'dan'}
-      ]
-    })
+    return fetch('http://localhost:8080/users')
+      .then((response) => {
+        return response.json()
+      })
+  }
+
+  getUsersAndSetToState() {
+    return this.getUsers().then((users) => {
+        this.setState({users})
+      })
   }
 
   componentWillMount() {
-    this.getUsers()
+    this.getUsersAndSetToState()
   }
 
   render() {
