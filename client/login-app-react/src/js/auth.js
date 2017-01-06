@@ -1,14 +1,14 @@
 import localStorage from 'localStorage'
 
 module.exports = {
-  login(email, pass, redirectCallback) {
+  login(username, password, redirectCallback) {
     if (localStorage.token) {
       redirectCallback(true)
       this.onChange(true)
       return
     }
 
-    if (email === 'test@test.com' && pass === 'test') {
+    if (username === 'adam' && password === 'secreta') {
       localStorage.token = Math.random().toString(36).substring(7)
       redirectCallback(true)
       this.onChange(true)
