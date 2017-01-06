@@ -37,6 +37,7 @@ class App extends React.Component {
           <li>{this.loginLogoutLink()}</li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to='/users'>Users</Link></li>
         </ul>
         {this.props.children }
       </div>
