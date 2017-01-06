@@ -7,3 +7,6 @@ VALUES ("adam", "secreta", 1),
 INSERT INTO roles (name)
 VALUES ("staff"),
 ("admin");
+
+INSERT INTO sessions (user_id, token)
+VALUES (1, "token");
