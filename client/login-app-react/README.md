@@ -1,4 +1,4 @@
-# Login Example
+# Login App React
 
 This is a simplified version of the example app here.
 https://github.com/ReactTraining/react-router/tree/master/examples/auth-flow
