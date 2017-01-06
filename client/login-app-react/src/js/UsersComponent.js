@@ -9,8 +9,12 @@ class UsersComponent extends React.Component {
   }
 
   getUsers() {
-    return fetch('http://localhost:8080/users')
-      .then((response) => {
+    return fetch('http://localhost:8080/users', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer token'
+        }
+    }).then((response) => {
         return response.json()
       })
   }

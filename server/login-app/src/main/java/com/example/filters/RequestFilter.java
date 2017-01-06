@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
 
-//@Component
+@Component
 public class RequestFilter implements Filter {
     private SessionDataMapper sessionDataMapper;
 
@@ -37,7 +37,8 @@ public class RequestFilter implements Filter {
     private boolean authorizeRequest(HttpServletRequest request) {
         String servletName = request.getServletPath();
         String method = request.getMethod();
-        if (servletName.equals("/unauthenticated") || servletName.equals("/session") || method.equalsIgnoreCase("options")) {
+
+        if (servletName.equals("/unauthenticated") || servletName.equals("/login") || method.equalsIgnoreCase("options")) {
             return true;
         }
 

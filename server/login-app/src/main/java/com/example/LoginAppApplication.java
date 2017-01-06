@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.filters.RequestFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -24,5 +25,10 @@ public class LoginAppApplication {
                         .allowedOrigins("http://localhost:8000");
             }
         };
+    }
+
+    @Bean
+    public RequestFilter requestFilter() {
+	    return new RequestFilter();
     }
 }
