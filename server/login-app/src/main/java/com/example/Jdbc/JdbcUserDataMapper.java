@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,21 @@ public class JdbcUserDataMapper implements UserDataMapper {
 
     @Override
     public List<User> all() {
-        return null;
+        String queryString = "SELECT u.id, u.name, r.name AS role " +
+                "FROM users AS u LEFT JOIN roles AS r ON u.role_id=r.id";
+
+        try {
+            return jdbcTemplate.query(
+                    queryString,
+                    (rs, i) -> new User(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("role")
+                    )
+            );
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
 
     @Override

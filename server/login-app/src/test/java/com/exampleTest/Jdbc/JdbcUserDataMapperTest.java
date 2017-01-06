@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -65,6 +66,16 @@ public class JdbcUserDataMapperTest {
         jdbcTemplate.update("DELETE FROM users");
         jdbcTemplate.update("DELETE FROM roles");
         jdbcTemplate.update("ALTER table roles AUTO_INCREMENT=1");
+    }
+
+    @Test
+    public void test_all_returnsUsersOnSuccess() throws Exception {
+        List<User> users = dataMapper.all();
+
+        User user = users.get(0);
+        assertNotNull(user.getId());
+        assertThat(user.getUsername(), is("adam"));
+        assertThat(user.getRole(), is("staff"));
     }
 
     @Test
