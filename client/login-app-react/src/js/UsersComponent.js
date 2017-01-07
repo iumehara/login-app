@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import UsersTable from './UsersTable'
+import { get } from './fetcher'
 
 class UsersComponent extends React.Component {
   constructor(props) {
@@ -9,14 +10,7 @@ class UsersComponent extends React.Component {
   }
 
   getUsers() {
-    return fetch('http://localhost:8080/users', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer token'
-        }
-    }).then((response) => {
-        return response.json()
-      })
+    return get('users')
   }
 
   getUsersAndSetToState() {
