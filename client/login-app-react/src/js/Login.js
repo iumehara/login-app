@@ -1,6 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { withRouter } from 'react-router'
 import auth from './auth'
 
 class Login extends React.Component {
@@ -8,30 +7,33 @@ class Login extends React.Component {
     super(props)
     this.state = {}
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.redirectIfLoggedIn = this.redirectIfLoggedIn.bind(this)
+  }
+
+  redirectIfLoggedIn(loggedIn) {
+    if (loggedIn) {
+      this.props.router.replace('/')
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault()
 
-    const email = this.refs.email.value
-    const pass = this.refs.pass.value
+    const username = this.refs.username.value
+    const password = this.refs.password.value
 
-    auth.login(email, pass, (loggedIn) => {
-      if (loggedIn) {
-        this.props.router.replace('/')
-      }
-    })
+    auth.login(username, password, this.redirectIfLoggedIn)
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label><input ref="email" placeholder="email" defaultValue="joe@example.com" /></label>
-        <label><input ref="pass" placeholder="password" /></label><br />
-        <button type="submit">login</button>
+        <label><input className='username' ref='username' placeholder='username'/></label>
+        <label><input className='password' ref='password' placeholder='password'/></label>
+        <button className='submitButton' type='submit'>login</button>
       </form>
     )
   }
 }
 
-export default withRouter(Login)
+export default Login

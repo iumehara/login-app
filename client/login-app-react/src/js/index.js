@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { hashHistory, Route, Router, Link, withRouter } from 'react-router'
+import { hashHistory, Route, Router } from 'react-router'
 import About from './About'
 import App from './App'
 import Dashboard from './Dashboard'
