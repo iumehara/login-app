@@ -5,6 +5,8 @@ import UsersComponent from '../src/js/UsersComponent'
 import UsersTable from '../src/js/UsersTable'
 
 describe('UsersComponent', () => {
+  afterEach(() => expect.restoreSpies())
+
   it('displays a UsersTable', () => {
     let stubGetUsersData = () => {
       return {
@@ -28,7 +30,5 @@ describe('UsersComponent', () => {
 
     expect(spy).toHaveBeenCalled()
     expect(usersComponent.find(UsersTable).length).toBe(1)
-
-    spy.restore()
   })
 })

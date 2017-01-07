@@ -21,7 +21,6 @@ class Login extends React.Component {
 
     const username = this.refs.username.value
     const password = this.refs.password.value
-
     auth.login(username, password, this.redirectIfLoggedIn)
   }
 

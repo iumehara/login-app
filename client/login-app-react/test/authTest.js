@@ -9,9 +9,7 @@ describe('auth', () => {
       delete localStorage.token
     })
 
-    afterEach(() => {
-      expect.restoreSpies()
-    })
+    afterEach(() => expect.restoreSpies())
 
     it('redirects with existing token if one exists', () => {
       let redirectCallbackSpy = expect.createSpy()

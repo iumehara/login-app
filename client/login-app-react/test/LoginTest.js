@@ -5,6 +5,8 @@ import Login from '../src/js/Login'
 import auth from '../src/js/auth'
 
 describe('Login', () => {
+  afterEach(() => expect.restoreSpies())
+
   it('renders form', () => {
     let login = shallow(<Login/>)
 
@@ -19,8 +21,8 @@ describe('Login', () => {
 
   it('handleSubmit', () => {
     let loginSpy = expect.spyOn(auth, 'login')
-    let redirectIfLoggedInSpy = expect.spyOn(Login.prototype, 'redirectIfLoggedIn')
     let login = shallow(<Login/>)
+    let redirectIfLoggedInSpy = expect.spyOn(login.instance(), 'redirectIfLoggedIn')
     login.instance().refs = {
       username: { value: 'username'},
       password: { value: 'password'}
@@ -33,6 +35,5 @@ describe('Login', () => {
       'password',
       redirectIfLoggedInSpy
     )
-    expect.restoreSpies()
   })
 })
