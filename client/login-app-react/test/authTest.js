@@ -24,26 +24,24 @@ describe('auth', () => {
       expect(onChangeSpy).toHaveBeenCalledWith(true)
     })
 
-    it('redirects with correct params', () => {
+    it('posts credentials and redirects on success', () => {
+      let postLoginSpy = expect.spyOn(
+        auth, 'postLogin'
+      ).andReturn({
+        then: (myFunc) => {
+          myFunc({token: 'token'})
+        }
+      })
+
       let redirectCallbackSpy = expect.createSpy()
       let onChangeSpy = expect.spyOn(auth, 'onChange')
 
       auth.login('adam', 'secreta', redirectCallbackSpy)
 
+
       expect(localStorage.token).toExist()
       expect(redirectCallbackSpy).toHaveBeenCalledWith(true)
       expect(onChangeSpy).toHaveBeenCalledWith(true)
-    })
-
-    it('does no redirect if params dont match', () => {
-      let redirectCallbackSpy = expect.createSpy()
-      let onChangeSpy = expect.spyOn(auth, 'onChange')
-
-      auth.login('wrong name', 'wrong password', redirectCallbackSpy)
-
-      expect(localStorage.token).toNotExist()
-      expect(redirectCallbackSpy).toHaveBeenCalledWith(false)
-      expect(onChangeSpy).toHaveBeenCalledWith(false)
     })
   })
 

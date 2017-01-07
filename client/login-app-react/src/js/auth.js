@@ -1,6 +1,11 @@
 import localStorage from 'localStorage'
+import { post } from './fetcher'
 
 module.exports = {
+  postLogin(body) {
+    return post('login', body)
+  },
+
   login(username, password, redirectCallback) {
     if (localStorage.token) {
       redirectCallback(true)
@@ -8,14 +13,12 @@ module.exports = {
       return
     }
 
-    if (username === 'adam' && password === 'secreta') {
+    this.postLogin({username: username, password: password})
+    .then((userSession) => {
       localStorage.token = Math.random().toString(36).substring(7)
       redirectCallback(true)
       this.onChange(true)
-    } else {
-      redirectCallback(false)
-      this.onChange(false)
-    }
+    })
   },
 
   logout() {
