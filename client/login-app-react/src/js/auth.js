@@ -15,7 +15,8 @@ module.exports = {
 
     this.postLogin({username: username, password: password})
     .then((userSession) => {
-      localStorage.token = Math.random().toString(36).substring(7)
+      localStorage.token = userSession.token
+      localStorage.username = userSession.username
       redirectCallback(true)
       this.onChange(true)
     })
@@ -23,6 +24,7 @@ module.exports = {
 
   logout() {
     delete localStorage.token
+    delete localStorage.username
     this.onChange(false)
   },
 

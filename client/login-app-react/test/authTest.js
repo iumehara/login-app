@@ -29,7 +29,7 @@ describe('auth', () => {
         auth, 'postLogin'
       ).andReturn({
         then: (myFunc) => {
-          myFunc({token: 'token'})
+          myFunc({token: 'token', id: 1, username: 'adam'})
         }
       })
 
@@ -39,7 +39,8 @@ describe('auth', () => {
       auth.login('adam', 'secreta', redirectCallbackSpy)
 
 
-      expect(localStorage.token).toExist()
+      expect(localStorage.token).toEqual('token')
+      expect(localStorage.username).toEqual('adam')
       expect(redirectCallbackSpy).toHaveBeenCalledWith(true)
       expect(onChangeSpy).toHaveBeenCalledWith(true)
     })

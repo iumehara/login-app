@@ -1,8 +1,12 @@
+import localStorage from 'localStorage'
+
 export const get = (resource) => {
+  console.log('---- local', localStorage)
+
   return fetch(pathForResource(resource), {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer token'
+        'Authorization': `Bearer ${localStorage.token}`
       }
   }).then((response) => {
     return response.json()
