@@ -32,5 +32,9 @@ module.exports = {
     return !!localStorage.token
   },
 
-  onChange() {}
+  onChange() {},
+
+  getUsername() {
+    return localStorage.username
+  }
 }

@@ -24,9 +24,18 @@ class App extends React.Component {
 
   loginLogoutLink() {
     if (this.state.loggedIn) {
-      return <Link to='/logout'>Log out</Link>
+      return (
+        <li>
+          <span className='username'>{auth.getUsername()} </span>
+          <span><Link to='/logout'>Log out</Link></span>
+        </li>
+      )
     } else {
-      return <Link to='/login'>Sign in</Link>
+      return (
+        <li>
+          <Link to='/login'>Sign in</Link>
+        </li>
+      )
     }
   }
 
@@ -34,9 +43,9 @@ class App extends React.Component {
     return (
       <div>
         <ul>
-          <li>{this.loginLogoutLink()}</li>
           <li><Link to="/about">About</Link></li>
           <li><Link to='/users'>Users</Link></li>
+          {this.loginLogoutLink()}
         </ul>
         {this.props.children }
       </div>

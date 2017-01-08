@@ -9,18 +9,22 @@ describe('App', () => {
   it('renders header', () => {
     let app = shallow(<App/>)
 
-    expect(app.find(Link).length).toBe(3)
-    expect(app.find(Link).nodes).toInclude(<Link to='/login'>Sign in</Link>)
-    expect(app.find(Link).nodes).toInclude(<Link to='/about'>About</Link>)
-    expect(app.find(Link).nodes).toInclude(<Link to='/users'>Users</Link>)
+    let links = app.find(Link)
+    expect(links.length).toBe(3)
+    expect(links.nodes).toInclude(<Link to='/login'>Sign in</Link>)
+    expect(links.nodes).toInclude(<Link to='/about'>About</Link>)
+    expect(links.nodes).toInclude(<Link to='/users'>Users</Link>)
   })
 
-  it('renders header with logout link if logged in', () => {
+  it('renders header with logout link and username if logged in', () => {
     localStorage.token = 'token'
+    localStorage.username = 'adam'
 
     let app = shallow(<App/>)
 
-    expect(app.find(Link).length).toBe(3)
-    expect(app.find(Link).nodes).toInclude(<Link to='/logout'>Log out</Link>)
+    let links = app.find(Link)
+    expect(links.length).toBe(3)
+    expect(links.nodes).toInclude(<Link to='/logout'>Log out</Link>)
+    expect(app.find('span.username').text()).toInclude('adam')
   })
 })
