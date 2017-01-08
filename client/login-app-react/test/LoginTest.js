@@ -5,6 +5,8 @@ import Login from '../src/js/Login'
 import auth from '../src/js/auth'
 
 describe('Login', () => {
+  beforeEach(() => auth.logout())
+
   afterEach(() => expect.restoreSpies())
 
   it('renders form', () => {

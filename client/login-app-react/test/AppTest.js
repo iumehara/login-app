@@ -9,10 +9,9 @@ describe('App', () => {
   it('renders header', () => {
     let app = shallow(<App/>)
 
-    expect(app.find(Link).length).toBe(4)
+    expect(app.find(Link).length).toBe(3)
     expect(app.find(Link).nodes).toInclude(<Link to='/login'>Sign in</Link>)
     expect(app.find(Link).nodes).toInclude(<Link to='/about'>About</Link>)
-    expect(app.find(Link).nodes).toInclude(<Link to='/dashboard'>Dashboard</Link>)
     expect(app.find(Link).nodes).toInclude(<Link to='/users'>Users</Link>)
   })
 
@@ -21,7 +20,7 @@ describe('App', () => {
 
     let app = shallow(<App/>)
 
-    expect(app.find(Link).length).toBe(4)
+    expect(app.find(Link).length).toBe(3)
     expect(app.find(Link).nodes).toInclude(<Link to='/logout'>Log out</Link>)
   })
 })

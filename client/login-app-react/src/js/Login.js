@@ -24,6 +24,10 @@ class Login extends React.Component {
     auth.login(username, password, this.redirectIfLoggedIn)
   }
 
+  componentWillMount() {
+    this.redirectIfLoggedIn(auth.loggedIn())
+  }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>

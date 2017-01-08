@@ -24,8 +24,17 @@ class UsersComponent extends React.Component {
   }
 
   render() {
+    let usersTable = () => {
+      if (this.state.users) {
+        return <UsersTable users={this.state.users}/>
+      }
+    }
+
     return (
-      <UsersTable users={this.state.users}/>
+      <div>
+        <h1>Users</h1>
+        {usersTable()}
+      </div>
     )
   }
 }
