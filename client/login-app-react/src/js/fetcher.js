@@ -1,7 +1,7 @@
 import localStorage from 'localStorage'
 
-export const get = (resource) => {
-  return fetch(pathForResource(resource), {
+export const get = (resource, id) => {
+  return fetch(pathForResource(resource, id), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.token}`
@@ -23,10 +23,13 @@ export const post = (resource, body) => {
   })
 }
 
-const pathForResource = (resource) => {
+const pathForResource = (resource, id) => {
     switch (resource) {
       case 'login':
         return 'http://localhost:8080/login'
+        break;
+      case 'user':
+        return `http://localhost:8080/users/${id}`
         break;
       default:
         return 'http://localhost:8080/users'

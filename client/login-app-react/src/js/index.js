@@ -6,6 +6,7 @@ import App from './App'
 import Login from './Login'
 import Logout from './Logout'
 import UsersComponent from './UsersComponent'
+import UserDetailComponent from './UserDetailComponent'
 
 render(
   <Router history={hashHistory}>
@@ -14,6 +15,7 @@ render(
       <Route path="logout" component={Logout} />
       <Route path="about" component={About} />
       <Route path="users" component={UsersComponent} />
+      <Route path="users/:username" component={UserDetailComponent} />
     </Route>
   </Router>,
   document.getElementById('login-example')
