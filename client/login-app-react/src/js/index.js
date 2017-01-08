@@ -1,7 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { hashHistory, Router, Route, IndexRoute } from 'react-router'
-import About from './About'
 import App from './App'
 import Login from './Login'
 import Logout from './Logout'
@@ -15,7 +14,6 @@ render(
       <IndexRoute component={HomeComponent} />
       <Route path="login" component={Login} />
       <Route path="logout" component={Logout} />
-      <Route path="about" component={About} />
       <Route path="users" component={UsersComponent} />
       <Route path="users/:username" component={UserDetailComponent} />
     </Route>
