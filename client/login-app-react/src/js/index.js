@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import { hashHistory, Router, Route, IndexRoute } from 'react-router'
 import App from './App'
 import Login from './Login'
-import Logout from './Logout'
 import HomeComponent from './HomeComponent'
 import UsersComponent from './UsersComponent'
 import UserDetailComponent from './UserDetailComponent'
@@ -13,7 +12,6 @@ render(
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
       <Route path="login" component={Login} />
-      <Route path="logout" component={Logout} />
       <Route path="users" component={UsersComponent} />
       <Route path="users/:username" component={UserDetailComponent} />
     </Route>

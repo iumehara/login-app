@@ -61,7 +61,7 @@ describe('auth', () => {
 
   describe('loggedIn', () => {
     it('returns false if token doesnt exist', () => {
-      let isLoggedIn = auth.loggedIn()
+      let isLoggedIn = auth.isLoggedIn()
 
       expect(isLoggedIn).toBe(false)
     })
@@ -70,7 +70,7 @@ describe('auth', () => {
       let initialToken = 'initialToken'
       localStorage.token = initialToken
 
-      let isLoggedIn = auth.loggedIn()
+      let isLoggedIn = auth.isLoggedIn()
 
       expect(isLoggedIn).toBe(true)
     })

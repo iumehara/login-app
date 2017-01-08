@@ -23,8 +23,8 @@ describe('App', () => {
     let app = shallow(<App/>)
 
     let links = app.find(Link)
-    expect(links.length).toBe(3)
-    expect(links.nodes).toInclude(<Link to='/logout'>Log out</Link>)
+    expect(links.length).toBe(2)
+    expect(app.find('a.logout').length).toBe(1)
     expect(app.find('span.username').text()).toInclude('adam')
   })
 })

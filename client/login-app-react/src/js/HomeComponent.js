@@ -6,7 +6,7 @@ import UserDetailComponent from './UserDetailComponent'
 class HomeComponent extends React.Component {
   render() {
     let currentUserInfo = () => {
-      if (auth.loggedIn()) {
+      if (auth.isLoggedIn()) {
         return <UserDetailComponent params={{username: auth.getUsername()}}/>
       } else {
         return <div>No User Data. Please log in.</div>

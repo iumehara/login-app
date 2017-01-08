@@ -28,7 +28,7 @@ module.exports = {
     this.onChange(false)
   },
 
-  loggedIn() {
+  isLoggedIn() {
     return !!localStorage.token
   },
 

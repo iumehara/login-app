@@ -10,8 +10,8 @@ class Login extends React.Component {
     this.redirectIfLoggedIn = this.redirectIfLoggedIn.bind(this)
   }
 
-  redirectIfLoggedIn(loggedIn) {
-    if (loggedIn) {
+  redirectIfLoggedIn(isLoggedIn) {
+    if (isLoggedIn) {
       this.props.router.replace('/')
     }
   }
@@ -25,7 +25,7 @@ class Login extends React.Component {
   }
 
   componentWillMount() {
-    this.redirectIfLoggedIn(auth.loggedIn())
+    this.redirectIfLoggedIn(auth.isLoggedIn())
   }
 
   render() {
