@@ -1,5 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { Link } from 'react-router'
 
 class UsersTable extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class UsersTable extends React.Component {
       return (
         <tr className={user.username} key={user.id}>
           <td>{user.id}</td>
-          <td>{user.username}</td>
+          <td><Link className={user.username} to={`users/${user.username}`}>{user.username}</Link></td>
           <td>{user.role}</td>
         </tr>
       )
