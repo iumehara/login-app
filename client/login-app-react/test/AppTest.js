@@ -11,9 +11,9 @@ describe('App', () => {
 
     let links = app.find(Link)
     expect(links.length).toBe(3)
-    expect(links.nodes).toInclude(<Link to='/login'>Sign in</Link>)
-    expect(links.nodes).toInclude(<Link to='/about'>About</Link>)
+    expect(links.nodes).toInclude(<Link to='/'>Home</Link>)
     expect(links.nodes).toInclude(<Link to='/users'>Users</Link>)
+    expect(links.nodes).toInclude(<Link to='/login'>Sign in</Link>)
   })
 
   it('renders header with logout link and username if logged in', () => {

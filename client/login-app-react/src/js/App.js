@@ -43,7 +43,7 @@ class App extends React.Component {
     return (
       <div>
         <ul>
-          <li><Link to="/about">About</Link></li>
+          <li><Link to="/">Home</Link></li>
           <li><Link to='/users'>Users</Link></li>
           {this.loginLogoutLink()}
         </ul>
