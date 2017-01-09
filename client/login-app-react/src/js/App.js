@@ -39,10 +39,16 @@ class App extends React.Component {
       )
     } else {
       return (
-        <li>
-          <Link to='/login'>Sign in</Link>
-        </li>
+        this.linkUnlessCurrent('/login', 'Sign in')
       )
+    }
+  }
+
+  linkUnlessCurrent(path, label) {
+    if (this.props.router.location.pathname == path) {
+      return <li>{label}</li>
+    } else {
+      return <li><Link to={path}>{label}</Link></li>
     }
   }
 
@@ -50,8 +56,8 @@ class App extends React.Component {
     return (
       <div>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to='/users'>Users</Link></li>
+          {this.linkUnlessCurrent('/', 'Home')}
+          {this.linkUnlessCurrent('/users', 'Users')}
           {this.loginLogoutLink()}
         </ul>
         {this.props.children }
@@ -61,3 +67,11 @@ class App extends React.Component {
 }
 
 export default App
+
+App.propTypes = {
+  router: React.PropTypes.shape({
+    location: React.PropTypes.shape({
+      pathname: React.PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
+}
