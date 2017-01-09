@@ -15,17 +15,25 @@ module.exports = {
 
     this.postLogin({username: username, password: password})
     .then((userSession) => {
-      localStorage.token = userSession.token
-      localStorage.username = userSession.username
+      this.setSession(userSession)
       redirectCallback(true)
       this.onChange(true)
     })
   },
 
   logout() {
+    this.deleteSession()
+    this.onChange(false)
+  },
+
+  setSession(session) {
+    localStorage.token = session.token
+    localStorage.username = session.username
+  },
+
+  deleteSession() {
     delete localStorage.token
     delete localStorage.username
-    this.onChange(false)
   },
 
   isLoggedIn() {
@@ -33,6 +41,10 @@ module.exports = {
   },
 
   onChange() {},
+
+  getToken() {
+    return localStorage.token
+  },
 
   getUsername() {
     return localStorage.username

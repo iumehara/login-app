@@ -2,14 +2,11 @@ import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'
 import { Link } from 'react-router'
-import localStorage from 'localStorage'
+import auth from '../src/js/auth'
 import App from '../src/js/App'
 
 describe('App', () => {
-  beforeEach(() => {
-    delete localStorage.token
-    delete localStorage.username
-  })
+  beforeEach(() => auth.deleteSession())
 
   describe('when not logged in', () => {
     it('renders correct header when on home path', () => {
@@ -43,8 +40,7 @@ describe('App', () => {
 
   describe('when logged in', () => {
     it('renders header with logout link and username if logged in', () => {
-      localStorage.token = 'token'
-      localStorage.username = 'adam'
+      auth.setSession({username: 'adam', token: 'token'})
 
       let app = shallow(<App router={{location: {pathname: '/'}}}/>)
 

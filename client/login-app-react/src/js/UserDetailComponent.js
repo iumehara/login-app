@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { get } from './fetcher'
+import auth from './auth'
 
 class UserDetailComponent extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class UserDetailComponent extends React.Component {
   }
 
   getUser(username) {
-    return get('user', username)
+    return get(auth.getToken(), 'user', username)
   }
 
   getUserAndSetToState(username) {

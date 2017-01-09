@@ -1,33 +1,35 @@
 import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'
-import localStorage from 'localStorage'
+import auth from '../src/js/auth'
 import HomeComponent from '../src/js/HomeComponent'
 import UserDetailComponent from '../src/js/UserDetailComponent'
 
 describe('HomeComponent page', () => {
-  beforeEach(() => delete localStorage.token)
-  afterEach(() => delete localStorage.token)
+  beforeEach(() => auth.deleteSession())
+  afterEach(() => auth.deleteSession())
 
-  it('displays the component', () => {
-    const homeComponent = shallow(<HomeComponent/>)
+  describe('not logged in', () => {
+    it('displays the component', () => {
+      const homeComponent = shallow(<HomeComponent/>)
 
-    expect(homeComponent.contains(<h1>Home</h1>)).toBe(true)
+      expect(homeComponent.contains(<h1>Home</h1>)).toBe(true)
+    })
+
+    it('displays login message if not logged in', () => {
+      let homeComponent = shallow(<HomeComponent/>)
+
+      expect(homeComponent.find(UserDetailComponent).length).toBe(0)
+    })
   })
 
-  it('displays user info if logged in', () => {
-    localStorage.token = 'token'
+  describe('logged in', () => {
+    it('displays user info if logged in', () => {
+      auth.setSession({username: 'adam', token: 'token'})
 
-    let homeComponent = shallow(<HomeComponent/>)
+      let homeComponent = shallow(<HomeComponent/>)
 
-    expect(homeComponent.find(UserDetailComponent).length).toBe(1)
-  })
-
-  it('displays login message if not logged in', () => {
-    delete localStorage.token
-
-    let homeComponent = shallow(<HomeComponent/>)
-
-    expect(homeComponent.find(UserDetailComponent).length).toBe(0)
+      expect(homeComponent.find(UserDetailComponent).length).toBe(1)
+    })
   })
 })

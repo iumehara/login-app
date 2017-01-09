@@ -1,10 +1,10 @@
-import localStorage from 'localStorage'
+import auth from './auth'
 
-export const get = (resource, id) => {
+export const get = (token, resource, id) => {
   return fetch(pathForResource(resource, id), {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.token}`
+        'Authorization': `Bearer ${token}`
       }
   }).then((response) => {
     return response.json()
