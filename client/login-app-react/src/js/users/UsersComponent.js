@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
 import UsersTable from './UsersTable'
-import { get } from './fetcher'
-import auth from './auth'
+import { get } from '../fetcher'
+import auth from '../auth'
 
 class UsersComponent extends React.Component {
   constructor(props) {

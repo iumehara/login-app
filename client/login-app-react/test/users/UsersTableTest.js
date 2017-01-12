@@ -1,7 +1,7 @@
 import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'
-import UsersTable from '../src/js/UsersTable'
+import UsersTable from '../../src/js/users/UsersTable'
 
 describe('UsersTable', () => {
   it('displays the usernames', () => {

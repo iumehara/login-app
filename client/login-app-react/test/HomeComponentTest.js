@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import auth from '../src/js/auth'
 import HomeComponent from '../src/js/HomeComponent'
-import UserDetailComponent from '../src/js/UserDetailComponent'
+import UserDetailComponent from '../src/js/users/UserDetailComponent'
 
 describe('HomeComponent page', () => {
   beforeEach(() => auth.deleteSession())

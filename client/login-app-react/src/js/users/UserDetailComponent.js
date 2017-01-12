@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { get } from './fetcher'
-import auth from './auth'
+import { get } from '../fetcher'
+import auth from '../auth'
 
 class UserDetailComponent extends React.Component {
   constructor(props) {

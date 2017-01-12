@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import auth from './auth'
-import UserDetailComponent from './UserDetailComponent'
+import UserDetailComponent from './users/UserDetailComponent'
 
 class HomeComponent extends React.Component {
   render() {

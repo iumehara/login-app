@@ -1,7 +1,7 @@
 import expect from 'expect'
 import { shallow, mount } from 'enzyme'
 import React from 'react'
-import UserDetailComponent from '../src/js/UserDetailComponent'
+import UserDetailComponent from '../../src/js/users/UserDetailComponent'
 
 describe('UserDetail', () => {
   it('renders  user name', () => {

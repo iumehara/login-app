@@ -4,8 +4,8 @@ import { hashHistory, Router, Route, IndexRoute } from 'react-router'
 import App from './App'
 import Login from './Login'
 import HomeComponent from './HomeComponent'
-import UsersComponent from './UsersComponent'
-import UserDetailComponent from './UserDetailComponent'
+import UsersComponent from './users/UsersComponent'
+import UserDetailComponent from './users/UserDetailComponent'
 
 render(
   <Router history={hashHistory}>

@@ -1,8 +1,8 @@
 import expect from 'expect'
 import { shallow, mount } from 'enzyme'
 import React from 'react'
-import UsersComponent from '../src/js/UsersComponent'
-import UsersTable from '../src/js/UsersTable'
+import UsersComponent from '../../src/js/users/UsersComponent'
+import UsersTable from '../../src/js/users/UsersTable'
 
 describe('UsersComponent', () => {
   afterEach(() => expect.restoreSpies())
