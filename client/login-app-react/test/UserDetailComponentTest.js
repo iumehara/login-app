@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import React from 'react'
 import UserDetailComponent from '../src/js/UserDetailComponent'
 
@@ -25,5 +25,19 @@ describe('UserDetail', () => {
 
     expect(userDetailComponent.find('.username').text()).toInclude('Username: adam')
     expect(userDetailComponent.find('.role').text()).toInclude('Role: staff')
+  })
+
+  it('makes new request if path is updated with new username', () => {
+    let getUserAndSetToStateSpy = expect.spyOn(
+      UserDetailComponent.prototype, 'getUserAndSetToState'
+    )
+
+    let userDetailComponent = mount(<UserDetailComponent params={{username: 'adam'}}/>)
+
+    expect(getUserAndSetToStateSpy).toHaveBeenCalled()
+
+    userDetailComponent.setProps({params: { username: 'bob' }})
+
+    expect(getUserAndSetToStateSpy.calls.length).toEqual(2)
   })
 })

@@ -6,7 +6,10 @@ import auth from './auth'
 class UserDetailComponent extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {user: null}
+    this.state = {
+      user: null,
+      username: props.params.username
+    }
   }
 
   getUser(username) {
@@ -20,7 +23,19 @@ class UserDetailComponent extends React.Component {
   }
 
   componentWillMount() {
-    this.getUserAndSetToState(this.props.params.username)
+    this.getUserAndSetToState(this.state.username)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      username: nextProps.params.username
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.username != prevState.username) {
+      this.getUserAndSetToState(this.state.username)
+    }
   }
 
   render() {
