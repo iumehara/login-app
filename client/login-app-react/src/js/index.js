@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { hashHistory, Router, Route, IndexRoute } from 'react-router'
+import '../scss/index.scss'
 import App from './App'
 import Login from './Login'
 import HomeComponent from './HomeComponent'
