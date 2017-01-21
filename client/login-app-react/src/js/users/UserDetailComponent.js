@@ -47,7 +47,7 @@ class UserDetailComponent extends React.Component {
   }
 
   logoutLink() {
-    if (auth.isLoggedIn()) {
+    if (auth.isLoggedIn() && this.props.params.username == auth.getUsername()) {
       return <span>
       <a className='logout' href='#' onClick={this.logoutWasClicked}>Log out</a>
       </span>

@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import React from 'react'
 import auth from '../src/js/auth'
 import HomeComponent from '../src/js/HomeComponent'
-import UserDetailComponent from '../src/js/users/UserDetailComponent'
+import UserDetail from '../src/js/users/UserDetail'
 
 describe('HomeComponent page', () => {
   beforeEach(() => auth.deleteSession())
@@ -19,7 +19,7 @@ describe('HomeComponent page', () => {
     it('displays login message if not logged in', () => {
       let homeComponent = shallow(<HomeComponent/>)
 
-      expect(homeComponent.find(UserDetailComponent).length).toBe(0)
+      expect(homeComponent.find(UserDetail).length).toBe(0)
     })
   })
 
@@ -29,7 +29,7 @@ describe('HomeComponent page', () => {
 
       let homeComponent = shallow(<HomeComponent/>)
 
-      expect(homeComponent.find(UserDetailComponent).length).toBe(1)
+      expect(homeComponent.find(UserDetail).length).toBe(1)
     })
   })
 })
