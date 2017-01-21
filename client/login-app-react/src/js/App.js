@@ -41,6 +41,16 @@ class App extends React.Component {
     }
   }
 
+  userDiv() {
+    if (
+      this.props.params &&
+      this.props.params.username &&
+      this.props.params.username != this.state.username
+    ) {
+      return <div className='current'>{this.props.params.username}</div>
+    }
+  }
+
   linkUnlessCurrent(path, label) {
     if (this.props.router.location.pathname == path) {
       return <div className='current'>{label}</div>
@@ -57,6 +67,7 @@ class App extends React.Component {
           {this.linkUnlessCurrent('/', 'home')}
           {this.linkUnlessCurrent('/users', 'users')}
           {this.profileLink()}
+          {this.userDiv()}
         </header>
         {this.props.children }
       </div>

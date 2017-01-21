@@ -2,10 +2,22 @@ import expect from 'expect'
 import { shallow, mount } from 'enzyme'
 import React from 'react'
 import UserDetailComponent from '../../src/js/users/UserDetailComponent'
+import UserDetail from '../../src/js/users/UserDetail'
 
-describe('UserDetail', () => {
-  it('renders  user name', () => {
-    let stubGetUserData = () => {
+describe('UserDetailComponenet', () => {
+  beforeEach(() => expect.restoreSpies())
+
+  it('displays user details', () => {
+    expect.spyOn(UserDetailComponent.prototype, 'componentWillMount')
+
+    let userDetailComponent = shallow(<UserDetailComponent params={{username: 'adam'}}/>)
+    userDetailComponent.setState({user: {id: 1, username: 'adam', role: 'staff'}})
+
+    expect(userDetailComponent.find('UserDetail').length).toEqual(1)
+  })
+
+  it('requests user and sets to state', () => {
+    const stubGetUserData = () => {
       return {
         then: (setStateImplementation) => {
           setStateImplementation(
@@ -15,16 +27,14 @@ describe('UserDetail', () => {
       }
     }
 
-    let spy = expect.spyOn(
-      UserDetailComponent.prototype, 'getUser'
-    ).andReturn(
-      stubGetUserData()
-    )
+    expect.spyOn(UserDetailComponent.prototype, 'getUser').andReturn(stubGetUserData())
 
-    let userDetailComponent = shallow(<UserDetailComponent params={{username: 'adam'}}/>)
+    const userDetailComponent = shallow(<UserDetailComponent params={{username: 'adam'}}/>)
 
-    expect(userDetailComponent.find('.username').text()).toInclude('Username: adam')
-    expect(userDetailComponent.find('.role').text()).toInclude('Role: staff')
+    expect(userDetailComponent.instance().state).toEqual({
+      user: {id: 1, username: 'adam', role: 'staff'},
+      username: 'adam'
+    })
   })
 
   it('makes new request if path is updated with new username', () => {

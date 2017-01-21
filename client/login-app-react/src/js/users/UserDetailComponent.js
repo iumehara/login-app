@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { get } from '../fetcher'
 import auth from '../auth'
+import UserDetail from './UserDetail'
 
 class UserDetailComponent extends React.Component {
   constructor(props) {
@@ -53,16 +54,10 @@ class UserDetailComponent extends React.Component {
     }
   }
 
-
   render() {
     let userDetail = () => {
       if (this.state.user) {
-        return (
-          <div>
-            <div className='username'>Username: {this.state.user.username}</div>
-            <div className='role'>Role: {this.state.user.role}</div>
-          </div>
-        )
+        return <UserDetail user={this.state.user}/>
       }
     }
 

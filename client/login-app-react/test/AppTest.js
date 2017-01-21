@@ -13,7 +13,7 @@ describe('App', () => {
       const app = shallow(<App router={{location: {pathname: '/'}}}/>)
 
       const header = app.find('header')
-      expect(header.node.props.children.length).toBe(4)
+      expect(header.node.props.children.length).toBe(5)
       expect(header.find('h2').text()).toBe('login app')
     })
 
@@ -42,6 +42,21 @@ describe('App', () => {
       expect(listItems).toInclude(<Link to='/'>home</Link>)
       expect(listItems).toInclude(<Link to='/users'>users</Link>)
       expect(listItems).toInclude(<div className='current'>sign in</div>)
+    })
+
+    it('renders user div when on other user page', () => {
+      const app = shallow(
+        <App
+          router={{location: {pathname: '/bob'}}}
+          params={{username: 'bob'}}
+        />
+      )
+
+      const listItems = app.find('header').node.props.children
+      expect(listItems).toInclude(<Link to='/'>home</Link>)
+      expect(listItems).toInclude(<Link to='/users'>users</Link>)
+      expect(listItems).toInclude(<Link to='/login'>sign in</Link>)
+      expect(listItems).toInclude(<div className='current'>bob</div>)
     })
   })
 
