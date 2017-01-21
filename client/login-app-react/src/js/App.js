@@ -7,7 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoggedIn: auth.isLoggedIn()
+      isLoggedIn: auth.isLoggedIn(),
+      username: auth.getUsername()
     }
     this.updateAuth = this.updateAuth.bind(this)
     this.logoutWasClicked = this.logoutWasClicked.bind(this)
@@ -15,7 +16,8 @@ class App extends React.Component {
 
   updateAuth(isLoggedIn) {
     this.setState({
-      isLoggedIn
+      isLoggedIn,
+      username: auth.getUsername()
     })
   }
 
@@ -29,37 +31,33 @@ class App extends React.Component {
     this.props.router.replace('/')
   }
 
-  loginLogoutLink() {
+  profileLink() {
     if (this.state.isLoggedIn) {
-      return (
-        <li>
-          <span className='username'>{auth.getUsername()} </span>
-          <span><a className='logout' href='#' onClick={this.logoutWasClicked}>Log out</a></span>
-        </li>
-      )
+      const path = `/users/${auth.getUsername()}`
+      const description = `your profile (${this.state.username})`
+      return this.linkUnlessCurrent(path, description)
     } else {
-      return (
-        this.linkUnlessCurrent('/login', 'Sign in')
-      )
+      return this.linkUnlessCurrent('/login', 'sign in')
     }
   }
 
   linkUnlessCurrent(path, label) {
     if (this.props.router.location.pathname == path) {
-      return <li>{label}</li>
+      return <div className='current'>{label}</div>
     } else {
-      return <li><Link to={path}>{label}</Link></li>
+      return <Link to={path}>{label}</Link>
     }
   }
 
   render() {
     return (
       <div>
-        <ul>
-          {this.linkUnlessCurrent('/', 'Home')}
-          {this.linkUnlessCurrent('/users', 'Users')}
-          {this.loginLogoutLink()}
-        </ul>
+        <header>
+          <h2 className='h2'>login app</h2>
+          {this.linkUnlessCurrent('/', 'home')}
+          {this.linkUnlessCurrent('/users', 'users')}
+          {this.profileLink()}
+        </header>
         {this.props.children }
       </div>
     )

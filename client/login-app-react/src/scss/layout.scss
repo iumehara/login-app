@@ -1,4 +1,40 @@
 body {
   background-color: $WHITE;
-  color: $GRAY;
+  color: $GRAY-DARK;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: $GRAY-LIGHT;
+  border-top: 1px solid $GRAY;
+  font-size: 16px;
+  font-weight: 600;
+
+  h2.h2 {
+    text-transform: uppercase;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    vertical-align: middle;
+  }
+
+  .current {
+    margin: 20px 0 0 0;
+    padding: 10px 20px;
+    background-color: $WHITE;
+    color: black;
+    border-top: 1px solid $GRAY;
+    border-left: 1px solid $GRAY;
+    border-right: 1px solid $GRAY;
+  }
+
+  a {
+    margin: 20px 0 0 0;
+    padding: 10px 20px;
+    color: $GRAY-DARK;
+    text-decoration: none;
+  }
 }

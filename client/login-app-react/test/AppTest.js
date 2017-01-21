@@ -9,32 +9,39 @@ describe('App', () => {
   beforeEach(() => auth.deleteSession())
 
   describe('when not logged in', () => {
-    it('renders correct header when on home path', () => {
-      let app = shallow(<App router={{location: {pathname: '/'}}}/>)
+    it('renders correct title with correct number of links', () => {
+      const app = shallow(<App router={{location: {pathname: '/'}}}/>)
 
-      let listItems = app.find('ul').node.props.children
-      expect(listItems.length).toBe(3)
-      expect(listItems).toInclude(<li>Home</li>)
-      expect(listItems).toInclude(<li><Link to='/users'>Users</Link></li>)
-      expect(listItems).toInclude(<li><Link to='/login'>Sign in</Link></li>)
+      const header = app.find('header')
+      expect(header.node.props.children.length).toBe(4)
+      expect(header.find('h2').text()).toBe('login app')
     })
-    it('renders correct header when on users path', () => {
-      let app = shallow(<App router={{location: {pathname: '/users'}}}/>)
 
-      let listItems = app.find('ul').node.props.children
-      expect(listItems.length).toBe(3)
-      expect(listItems).toInclude(<li><Link to='/'>Home</Link></li>)
-      expect(listItems).toInclude(<li>Users</li>)
-      expect(listItems).toInclude(<li><Link to='/login'>Sign in</Link></li>)
+    it('renders correct links when on home path', () => {
+      const app = shallow(<App router={{location: {pathname: '/'}}}/>)
+
+      const listItems = app.find('header').node.props.children
+      expect(listItems).toInclude(<div className='current'>home</div>)
+      expect(listItems).toInclude(<Link to='/users'>users</Link>)
+      expect(listItems).toInclude(<Link to='/login'>sign in</Link>)
     })
-    it('renders correct header when on home path', () => {
-      let app = shallow(<App router={{location: {pathname: '/login'}}}/>)
 
-      let listItems = app.find('ul').node.props.children
-      expect(listItems.length).toBe(3)
-      expect(listItems).toInclude(<li><Link to='/'>Home</Link></li>)
-      expect(listItems).toInclude(<li><Link to='/users'>Users</Link></li>)
-      expect(listItems).toInclude(<li>Sign in</li>)
+    it('renders correct links when on users path', () => {
+      const app = shallow(<App router={{location: {pathname: '/users'}}}/>)
+
+      const listItems = app.find('header').node.props.children
+      expect(listItems).toInclude(<Link to='/'>home</Link>)
+      expect(listItems).toInclude(<div className='current'>users</div>)
+      expect(listItems).toInclude(<Link to='/login'>sign in</Link>)
+    })
+
+    it('renders correct links when on profile path', () => {
+      const app = shallow(<App router={{location: {pathname: '/login'}}}/>)
+
+      const listItems = app.find('header').node.props.children
+      expect(listItems).toInclude(<Link to='/'>home</Link>)
+      expect(listItems).toInclude(<Link to='/users'>users</Link>)
+      expect(listItems).toInclude(<div className='current'>sign in</div>)
     })
   })
 
@@ -44,12 +51,10 @@ describe('App', () => {
 
       let app = shallow(<App router={{location: {pathname: '/'}}}/>)
 
-      let listItems = app.find('ul').node.props.children
-      expect(listItems.length).toBe(3)
-      expect(listItems).toInclude(<li>Home</li>)
-      expect(listItems).toInclude(<li><Link to='/users'>Users</Link></li>)
-      expect(app.find('span.username').text()).toInclude('adam')
-      expect(app.find('a.logout').length).toBe(1)
+      let listItems = app.find('header').node.props.children
+      expect(listItems).toInclude(<div className='current'>home</div>)
+      expect(listItems).toInclude(<Link to='/users'>users</Link>)
+      expect(listItems).toInclude(<Link to='/users/adam'>your profile (adam)</Link>)
     })
   })
 })

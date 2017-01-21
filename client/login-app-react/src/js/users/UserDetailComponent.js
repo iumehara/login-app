@@ -10,6 +10,7 @@ class UserDetailComponent extends React.Component {
       user: null,
       username: props.params.username
     }
+    this.logoutWasClicked = this.logoutWasClicked.bind(this)
   }
 
   getUser(username) {
@@ -38,6 +39,21 @@ class UserDetailComponent extends React.Component {
     }
   }
 
+  logoutWasClicked(event) {
+    event.preventDefault()
+    auth.logout()
+    this.props.router.replace('/')
+  }
+
+  logoutLink() {
+    if (auth.isLoggedIn()) {
+      return <span>
+      <a className='logout' href='#' onClick={this.logoutWasClicked}>Log out</a>
+      </span>
+    }
+  }
+
+
   render() {
     let userDetail = () => {
       if (this.state.user) {
@@ -54,6 +70,7 @@ class UserDetailComponent extends React.Component {
       <div>
         <h1>User</h1>
         {userDetail()}
+        {this.logoutLink()}
       </div>
     )
   }
