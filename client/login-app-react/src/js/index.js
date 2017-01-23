@@ -7,6 +7,7 @@ import Login from './Login'
 import HomeComponent from './HomeComponent'
 import UsersComponent from './users/UsersComponent'
 import UserDetailComponent from './users/UserDetailComponent'
+import NewUserComponent from './users/NewUserComponent'
 
 render(
   <Router history={hashHistory}>
@@ -14,6 +15,7 @@ render(
       <IndexRoute component={HomeComponent} />
       <Route path="login" component={Login} />
       <Route path="users" component={UsersComponent} />
+      <Route path="users/new" component={NewUserComponent} />
       <Route path="users/:username" component={UserDetailComponent} />
     </Route>
   </Router>,

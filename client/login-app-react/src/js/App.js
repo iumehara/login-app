@@ -68,6 +68,7 @@ class App extends React.Component {
           {this.linkUnlessCurrent('/users', 'users')}
           {this.profileLink()}
           {this.userDiv()}
+          {this.linkUnlessCurrent('/users/new', 'add user')}
         </header>
         {this.props.children }
       </div>

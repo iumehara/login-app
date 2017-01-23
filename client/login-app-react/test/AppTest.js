@@ -13,7 +13,7 @@ describe('App', () => {
       const app = shallow(<App router={{location: {pathname: '/'}}}/>)
 
       const header = app.find('header')
-      expect(header.node.props.children.length).toBe(5)
+      expect(header.node.props.children.length).toBe(6)
       expect(header.find('h2').text()).toBe('login app')
     })
 
@@ -24,6 +24,7 @@ describe('App', () => {
       expect(listItems).toInclude(<div className='current'>home</div>)
       expect(listItems).toInclude(<Link to='/users'>users</Link>)
       expect(listItems).toInclude(<Link to='/login'>sign in</Link>)
+      expect(listItems).toInclude(<Link to='/users/new'>add user</Link>)
     })
 
     it('renders correct links when on users path', () => {
@@ -33,6 +34,7 @@ describe('App', () => {
       expect(listItems).toInclude(<Link to='/'>home</Link>)
       expect(listItems).toInclude(<div className='current'>users</div>)
       expect(listItems).toInclude(<Link to='/login'>sign in</Link>)
+      expect(listItems).toInclude(<Link to='/users/new'>add user</Link>)
     })
 
     it('renders correct links when on profile path', () => {
@@ -42,12 +44,13 @@ describe('App', () => {
       expect(listItems).toInclude(<Link to='/'>home</Link>)
       expect(listItems).toInclude(<Link to='/users'>users</Link>)
       expect(listItems).toInclude(<div className='current'>sign in</div>)
+      expect(listItems).toInclude(<Link to='/users/new'>add user</Link>)
     })
 
     it('renders user div when on other user page', () => {
       const app = shallow(
         <App
-          router={{location: {pathname: '/bob'}}}
+          router={{location: {pathname: '/users/bob'}}}
           params={{username: 'bob'}}
         />
       )
@@ -57,6 +60,17 @@ describe('App', () => {
       expect(listItems).toInclude(<Link to='/users'>users</Link>)
       expect(listItems).toInclude(<Link to='/login'>sign in</Link>)
       expect(listItems).toInclude(<div className='current'>bob</div>)
+      expect(listItems).toInclude(<Link to='/users/new'>add user</Link>)
+    })
+
+    it('renders correct links when on add user path', () => {
+      const app = shallow(<App router={{location: {pathname: '/users/new'}}}/>)
+
+      const listItems = app.find('header').node.props.children
+      expect(listItems).toInclude(<Link to='/'>home</Link>)
+      expect(listItems).toInclude(<Link to='/users'>users</Link>)
+      expect(listItems).toInclude(<Link to='/login'>sign in</Link>)
+      expect(listItems).toInclude(<div className='current'>add user</div>)
     })
   })
 
