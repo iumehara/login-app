@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme'
 import React from 'react'
 import UsersComponent from '../../src/js/users/UsersComponent'
 import UsersTable from '../../src/js/users/UsersTable'
+import * as fetcher from '../../src/js/fetcher'
 
 describe('UsersComponent', () => {
   afterEach(() => expect.restoreSpies())
@@ -21,7 +22,7 @@ describe('UsersComponent', () => {
     }
 
     let spy = expect.spyOn(
-      UsersComponent.prototype, 'getUsers'
+      fetcher, 'getUsers'
     ).andReturn(
       stubGetUsersData()
     )

@@ -2,6 +2,7 @@ import expect from 'expect'
 import React from 'react'
 import auth from '../src/js/auth'
 import localStorage from 'localStorage'
+import * as fetcher from '../src/js/fetcher'
 
 describe('auth', () => {
   describe('login', () => {
@@ -26,7 +27,7 @@ describe('auth', () => {
 
     it('posts credentials and redirects on success', () => {
       let postLoginSpy = expect.spyOn(
-        auth, 'postLogin'
+        fetcher, 'postLogin'
       ).andReturn({
         then: (myFunc) => {
           myFunc({token: 'token', id: 1, username: 'adam'})

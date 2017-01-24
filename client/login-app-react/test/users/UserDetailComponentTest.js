@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme'
 import React from 'react'
 import UserDetailComponent from '../../src/js/users/UserDetailComponent'
 import UserDetail from '../../src/js/users/UserDetail'
+import * as fetcher from '../../src/js/fetcher'
 
 describe('UserDetailComponenet', () => {
   beforeEach(() => expect.restoreSpies())
@@ -27,7 +28,7 @@ describe('UserDetailComponenet', () => {
       }
     }
 
-    expect.spyOn(UserDetailComponent.prototype, 'getUser').andReturn(stubGetUserData())
+    expect.spyOn(fetcher, 'getUser').andReturn(stubGetUserData())
 
     const userDetailComponent = shallow(<UserDetailComponent params={{username: 'adam'}}/>)
 

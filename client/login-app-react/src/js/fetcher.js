@@ -1,7 +1,19 @@
 import auth from './auth'
 
-export const get = (token, resource, id) => {
-  return fetch(pathForResource(resource, id), {
+export const getUsers = (token) => {
+  return get(token, 'http://localhost:8080/users')
+}
+
+export const getUser = (token, username) => {
+  return get(token, `http://localhost:8080/users/${username}`)
+}
+
+export const postLogin = (body) => {
+  return post({}, 'http://localhost:8080/login', body)
+}
+
+const get = (token, path) => {
+  return fetch(path, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -11,8 +23,8 @@ export const get = (token, resource, id) => {
   })
 }
 
-export const post = (resource, body) => {
-  return fetch(pathForResource(resource), {
+const post = (token, path, body) => {
+  return fetch(path, {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -21,17 +33,4 @@ export const post = (resource, body) => {
   }).then((response) => {
     return response.json()
   })
-}
-
-const pathForResource = (resource, id) => {
-    switch (resource) {
-      case 'login':
-        return 'http://localhost:8080/login'
-        break;
-      case 'user':
-        return `http://localhost:8080/users/${id}`
-        break;
-      default:
-        return 'http://localhost:8080/users'
-    }
 }

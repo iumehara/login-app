@@ -1,11 +1,7 @@
 import localStorage from 'localStorage'
-import { post } from './fetcher'
+import { postLogin } from './fetcher'
 
 module.exports = {
-  postLogin(body) {
-    return post('login', body)
-  },
-
   login(username, password, redirectCallback) {
     if (localStorage.token) {
       redirectCallback(true)
@@ -13,7 +9,7 @@ module.exports = {
       return
     }
 
-    this.postLogin({username: username, password: password})
+    postLogin({username: username, password: password})
     .then((userSession) => {
       this.setSession(userSession)
       redirectCallback(true)

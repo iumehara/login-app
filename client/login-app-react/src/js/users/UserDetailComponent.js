@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { get } from '../fetcher'
+import { getUser } from '../fetcher'
 import auth from '../auth'
 import UserDetail from './UserDetail'
 
@@ -14,12 +14,9 @@ class UserDetailComponent extends React.Component {
     this.logoutWasClicked = this.logoutWasClicked.bind(this)
   }
 
-  getUser(username) {
-    return get(auth.getToken(), 'user', username)
-  }
-
   getUserAndSetToState(username) {
-    return this.getUser(username).then((user) => {
+    return getUser(auth.getToken(), username)
+      .then((user) => {
         this.setState({user})
       })
   }

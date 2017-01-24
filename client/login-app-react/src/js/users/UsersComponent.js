@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import UsersTable from './UsersTable'
-import { get } from '../fetcher'
+import { getUsers } from '../fetcher'
 import auth from '../auth'
 
 class UsersComponent extends React.Component {
@@ -10,12 +10,9 @@ class UsersComponent extends React.Component {
     this.state = {users: []}
   }
 
-  getUsers() {
-    return get(auth.getToken(), 'users')
-  }
-
   getUsersAndSetToState() {
-    return this.getUsers().then((users) => {
+    return getUsers(auth.getToken())
+      .then((users) => {
         this.setState({users})
       })
   }
