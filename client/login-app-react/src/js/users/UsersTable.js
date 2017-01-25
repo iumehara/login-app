@@ -41,9 +41,9 @@ class UsersTable extends React.Component {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Role</th>
+            <th>id</th>
+            <th>name</th>
+            <th>role</th>
             <th></th>
           </tr>
         </thead>
@@ -52,7 +52,7 @@ class UsersTable extends React.Component {
           <tr>
             <td></td>
             <td><input ref='username' placeholder='username'></input></td>
-            <td><input ref='role' placeholder='password'></input></td>
+            <td><input ref='role' placeholder='role'></input></td>
             <td onClick={this.handleSubmit}>+</td>
           </tr>
         </tbody>
