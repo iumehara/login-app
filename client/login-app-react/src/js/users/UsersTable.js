@@ -12,8 +12,13 @@ class UsersTable extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    const username = this.refs.username.value
-    const password = this.refs.role.value
+    const userParams = {
+      username: this.refs.username.value,
+      password: 'secret',
+      role: this.refs.role.value
+    }
+
+    this.props.createUser(userParams)
   }
 
   render() {
@@ -21,7 +26,11 @@ class UsersTable extends React.Component {
       return (
         <tr className={user.username} key={user.id}>
           <td>{user.id}</td>
-          <td><Link className={user.username} to={`users/${user.username}`}>{user.username}</Link></td>
+          <td>
+            <Link className={user.username} to={`users/${user.username}`}>
+              {user.username}
+            </Link>
+          </td>
           <td>{user.role}</td>
           <td></td>
         </tr>
