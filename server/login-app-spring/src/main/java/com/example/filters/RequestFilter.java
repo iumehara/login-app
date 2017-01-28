@@ -1,7 +1,7 @@
 package com.example.filters;
 
-import com.example.Jdbc.JdbcSessionDataMapper;
-import com.example.SessionDataMapper;
+import com.example.jdbc.JdbcSessionDataMapper;
+import com.example.session.SessionDataMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
