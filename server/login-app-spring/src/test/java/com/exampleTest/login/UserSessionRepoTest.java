@@ -1,4 +1,4 @@
-package com.exampleTest.user;
+package com.exampleTest.login;
 
 import com.example.session.Session;
 import com.example.user.User;
