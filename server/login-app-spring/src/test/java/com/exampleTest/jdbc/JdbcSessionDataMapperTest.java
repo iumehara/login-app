@@ -18,7 +18,8 @@ public class JdbcSessionDataMapperTest {
 
     @Before
     public void setUp() throws Exception {
-        jdbcTemplate = JdbcTestTemplate.create();
+        JdbcTestTemplate jdbcTestTemplate = new JdbcTestTemplate();
+        this.jdbcTemplate = jdbcTestTemplate.jdbcTemplate;
     }
 
     @After

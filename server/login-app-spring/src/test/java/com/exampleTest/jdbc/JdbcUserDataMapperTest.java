@@ -9,11 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
@@ -26,39 +23,16 @@ public class JdbcUserDataMapperTest {
 
     @Before
     public void setUp() throws Exception {
-        jdbcTemplate = JdbcTestTemplate.create();
+        JdbcTestTemplate jdbcTestTemplate = new JdbcTestTemplate();
 
-        insertUserIntoDatabase();
-        insertRoleIntoDatabase("staff");
-        insertRoleIntoDatabase("admin");
+        jdbcTemplate = jdbcTestTemplate.jdbcTemplate;
+
+        jdbcTestTemplate.insertUserIntoDatabase();
+
+        jdbcTestTemplate.insertRoleIntoDatabase("staff");
+        jdbcTestTemplate.insertRoleIntoDatabase("admin");
 
         dataMapper = new JdbcUserDataMapper(jdbcTemplate);
-    }
-
-    private void insertUserIntoDatabase() {
-        SimpleJdbcInsert insert = new SimpleJdbcInsert(this.jdbcTemplate)
-                .withTableName("users")
-                .usingColumns("name", "password", "role_id")
-                .usingGeneratedKeyColumns("id");
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("name", "adam");
-        params.put("password", "secret");
-        params.put("role_id", 1);
-
-        insert.execute(params);
-    }
-
-    private void insertRoleIntoDatabase(String role) {
-        SimpleJdbcInsert insert = new SimpleJdbcInsert(this.jdbcTemplate)
-                .withTableName("roles")
-                .usingColumns("name")
-                .usingGeneratedKeyColumns("id");
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("name", role);
-
-        insert.execute(params);
     }
 
     @After
