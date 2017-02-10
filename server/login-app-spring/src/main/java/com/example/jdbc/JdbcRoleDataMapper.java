@@ -3,10 +3,12 @@ package com.example.jdbc;
 import com.example.role.Role;
 import com.example.role.RoleDataMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
 import java.util.List;
 
+@Repository
 public class JdbcRoleDataMapper implements RoleDataMapper {
     private JdbcTemplate jdbcTemplate;
 
