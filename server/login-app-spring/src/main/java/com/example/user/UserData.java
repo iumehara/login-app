@@ -14,6 +14,12 @@ public class UserData {
         this.roleId = roleId;
     }
 
+    public UserData(String username, String password, int roleId) {
+        this.username = username;
+        this.password = password;
+        this.roleId = roleId;
+    }
+
     public String getUsername() {
         return username;
     }

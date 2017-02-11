@@ -1,5 +1,6 @@
 package com.exampleTest.jdbc;
 
+import com.example.security.Encoder;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -28,9 +29,10 @@ class JdbcTestTemplate {
                 .usingColumns("name", "password", "role_id")
                 .usingGeneratedKeyColumns("id");
 
+        String encodedPassword = new Encoder().encode("secret");
         Map<String, Object> params = new HashMap<>();
         params.put("name", "adam");
-        params.put("password", "secret");
+        params.put("password", encodedPassword);
         params.put("role_id", 1);
 
         insert.execute(params);

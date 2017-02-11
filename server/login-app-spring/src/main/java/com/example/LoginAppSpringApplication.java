@@ -11,11 +11,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 public class LoginAppSpringApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LoginAppSpringApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LoginAppSpringApplication.class, args);
+    }
 
-	@Bean
+    @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
             @Override
@@ -29,6 +29,6 @@ public class LoginAppSpringApplication {
 
     @Bean
     public RequestFilter requestFilter() {
-	    return new RequestFilter();
+        return new RequestFilter();
     }
 }

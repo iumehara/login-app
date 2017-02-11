@@ -1,6 +1,7 @@
 package com.example.jdbc;
 
 import com.example.login.LoginCredentials;
+import com.example.security.Encoder;
 import com.example.user.User;
 import com.example.user.UserData;
 import com.example.user.UserDataMapper;
@@ -64,13 +65,18 @@ public class JdbcUserDataMapper implements UserDataMapper {
 
     @Override
     public Optional<User> validate(LoginCredentials credentials) {
-        String queryString = "SELECT u.id, u.name, r.name AS role " +
-                "FROM users AS u LEFT JOIN roles AS r ON u.role_id=r.id " +
-                "WHERE u.name=? AND u.password=?";
-
         String username = credentials.getUsername();
-        String password = credentials.getPassword();
+        Optional<UserData> maybeUserData = findUserDataByUsername(username);
+        if (!maybeUserData.isPresent()) return Optional.empty();
 
+        String password = credentials.getPassword();
+        String encodedPassword = maybeUserData.get().getPassword();
+        boolean matches = new Encoder().matches(password, encodedPassword);
+        if (!matches) return Optional.empty();
+
+        String queryString = "SELECT u.id, u.name, u.password, r.name AS role " +
+                "FROM users AS u LEFT JOIN roles AS r ON u.role_id=r.id " +
+                "WHERE u.name=?";
         try {
             User user = jdbcTemplate.queryForObject(
                     queryString,
@@ -79,8 +85,7 @@ public class JdbcUserDataMapper implements UserDataMapper {
                             rs.getString("name"),
                             rs.getString("role")
                     ),
-                    username,
-                    password
+                    username
             );
             return Optional.of(user);
         } catch (Exception e) {
@@ -94,9 +99,12 @@ public class JdbcUserDataMapper implements UserDataMapper {
         jdbcInsert.withTableName("users")
                 .usingGeneratedKeyColumns("id");
 
+        String password = userData.getPassword();
+        if (password == null) return Optional.empty();
+        String encodedPassword = new Encoder().encode(password);
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("name", userData.getUsername());
-        parameters.put("password", userData.getPassword());
+        parameters.put("password", encodedPassword);
         parameters.put("role_id", userData.getRoleId());
 
         MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource(parameters);
@@ -120,6 +128,25 @@ public class JdbcUserDataMapper implements UserDataMapper {
                     roleName
             );
             return Optional.of(roleId);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+
+    private Optional<UserData> findUserDataByUsername(String username) {
+        String queryString = "SELECT * FROM users where name=?";
+        try {
+            UserData userData = jdbcTemplate.queryForObject(
+                    queryString,
+                    (rs, i) -> new UserData(
+                            rs.getString("name"),
+                            rs.getString("password"),
+                            rs.getInt("role_id")
+                    ),
+                    username
+            );
+            return Optional.of(userData);
         } catch (Exception e) {
             return Optional.empty();
         }
